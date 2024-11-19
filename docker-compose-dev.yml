@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   database:
-    container_name: vitnode_postgres_development
+    container_name: vitnode_postgres_development_blog
     image: postgres:16.3-alpine
     restart: unless-stopped
     environment:
@@ -18,7 +18,7 @@ services:
       - vitnode_dev
 
   pgadmin:
-    container_name: vitnode_pgadmin_development
+    container_name: vitnode_pgadmin_development_blog
     image: dpage/pgadmin4:latest
     restart: unless-stopped
     environment:

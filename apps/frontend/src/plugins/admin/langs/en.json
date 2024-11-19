@@ -1,14 +1,19 @@
 {
   "admin": {
-    "dev_mode": "Development Mode",
-    "title": "Admin Control Panel",
-    "title_short": "Admin",
-    "home_page": "Home Page",
-    "version": "Version: {version}",
-    "search": {
-      "placeholder": "Search...",
-      "no_results": "No results found.",
-      "pages": "Pages"
+    "global": {
+      "dev_mode": "Development Mode",
+      "title": "Admin Control Panel",
+      "title_short": "Admin",
+      "version": "Version: {version}",
+      "diagnostic_tools": "Diagnostic Tools",
+      "home_page": "Home Page",
+      "mobile_not_supported": "Mobile devices are not supported.",
+      "search": {
+        "placeholder": "Search...",
+        "no_results": "No results found.",
+        "desc": "Search Engine for AdminCP",
+        "pages": "Pages"
+      }
     },
     "theme_editor": {
       "title": "Theme Editor",
@@ -59,6 +64,7 @@
       "settings": {
         "main": {
           "title": "Main Settings",
+          "desc": "These settings are used to configure the main features of your website.",
           "name": {
             "label": "Name Site"
           },
@@ -68,17 +74,29 @@
           "description": {
             "label": "Description Site"
           },
-          "copyright": {
-            "label": "Copyright Site"
+          "contact_email": {
+            "label": "Contact Email",
+            "desc": "This email address will be applied to the contact form and other contact points on your website."
           }
         },
         "email": {
-          "provider": {
-            "title": "Email Provider",
-            "none": "None",
-            "smtp": "SMTP",
-            "resend": "Resend Email",
-            "resend_desc": "Read more on <link>Resend Email</link>."
+          "title": "Email",
+          "desc": "Send emails from your website. Unlock more features like password reset, email verification, and more.",
+          "logs": {
+            "title": "Email Error Logs",
+            "id": "ID",
+            "to": "To",
+            "subject": "Subject",
+            "created": "Created",
+            "error": "Error",
+            "show": {
+              "title": "Show log",
+              "title_dialog": "Email Log - #{id}",
+              "to": "To: <email>{to}</email>",
+              "html": "HTML",
+              "error": "Error Message",
+              "subject": "Subject"
+            }
           },
           "logo": "Logo",
           "resend_key": "Resend Key",
@@ -90,7 +108,6 @@
           "color_primary": "Primary Color",
           "test": {
             "title": "Test Email Send",
-            "from": "From",
             "to": "To",
             "subject": "Subject",
             "preview_text": "Preview Message",
@@ -132,20 +149,29 @@
         "authorization": {
           "force_login": {
             "title": "Force Login",
-            "desc": "This option will block your site access from guest users."
+            "desc": "Force users to log in before they can access your website."
           },
           "lock_register": {
             "title": "Lock Register",
-            "desc": "This option will lock users from registering on your site."
+            "desc": "Don't allow users to register on your website."
+          },
+          "require_confirm_email": {
+            "title": "Require Confirm Email",
+            "desc": "Require users to confirm their email address before they can access your site."
           }
         },
         "legal": {
           "title": "Legal & Policies",
           "desc": "These settings are used to generate the legal pages on your website.",
           "legal_public": "Public Legal",
+          "created": "Created",
+          "updated": "Updated",
           "preview": "Preview",
           "create_edit": {
-            "create": "Create Policy",
+            "create": {
+              "title": "Create Policy",
+              "desc": "Create a new policy for your website."
+            },
             "edit": "Edit Policy",
             "form": {
               "title": "Title",
@@ -173,6 +199,19 @@
             "desc": "This action will delete the policy <name></name>.",
             "confirm": "Yes, delete policy",
             "success": "Policy has been deleted."
+          }
+        },
+        "ai": {
+          "title": "Artificial Intelligence (AI)",
+          "desc": "Integrate powerful Artificial Intelligence to boost user experience with personalized content, smarter search, SEO optimization and more.",
+          "testing": {
+            "title": "Test Your AI",
+            "desc": "Here you can test your AI to see how it works.",
+            "response": "Response",
+            "response_success": "If you see the response, your AI is working correctly.",
+            "prompt": "Prompt",
+            "prompt_placeholder": "Ask a question...",
+            "submit": "Ask"
           }
         }
       },
@@ -214,10 +253,16 @@
       },
       "plugins": {
         "title": "Plugins",
+        "desc": "Extend the functionality of your app with plugins.",
+        "upload_new_version": "Upload New Version",
         "set_default": "Set as default",
         "get_help": "Get help",
         "search_placeholder": "Search by name...",
         "dev_tools": "Developer Tools",
+        "name": "Name",
+        "version": "Version",
+        "author": "Author",
+        "updated": "Updated",
         "warn_req_restart_server": {
           "title": "Required Restart Server",
           "desc": "We're detected changes in <bold>the plugin system</bold>. To apply these changes, you need to <bold>restart the server</bold>."
@@ -230,8 +275,10 @@
             "title": "Navigation in AdminCP",
             "lang_key": "Lang Key: <key></key>",
             "keywords": "Keywords: <keywords></keywords>",
+            "link_url_with_link": "Link URL: <link></link>",
             "create": {
               "title": "Create Navigation",
+              "desc": "Create a new navigation for your plugin.",
               "code": {
                 "label": "Code",
                 "desc": "Should be unique. Min 3-50 characters.",
@@ -259,11 +306,36 @@
               "desc": "This action will delete <code></code> navigation.",
               "success": "Navigation has been deleted."
             }
+          },
+          "permissions-admin": {
+            "title": "Admin Permissions",
+            "page_permission": "Page: <page></page>",
+            "lang_key": "Lang Key: <key></key>",
+            "create_edit": {
+              "id": {
+                "label": "ID",
+                "desc": "Unique ID for this permission.",
+                "exists": "Permission with this ID already exists."
+              },
+              "parent": {
+                "label": "Group",
+                "null": "No group permission"
+              },
+              "create_success": "Permission has been created."
+            },
+            "delete": {
+              "desc": "This action will delete the permission <id></id>. Remember to delete all conditions associated with this permission.",
+              "submit": "Yes, delete permission",
+              "success": "Permission has been deleted.",
+              "children_warn": {
+                "title": "This permission has children",
+                "desc": "If you delete this permission, all children will be deleted too."
+              }
+            }
           }
         },
         "create": {
           "title": "Create Plugin",
-          "success": "Plugin has been created.",
           "name": {
             "label": "Name",
             "desc": "Min 3-50 characters."
@@ -298,11 +370,6 @@
           "title": "Upload Plugin",
           "title_new_version": "Upload New Version Plugin",
           "info": "After uploading the plugin, you need to restart the server to apply the changes.",
-          "success": {
-            "title": "Plugin has been uploaded.",
-            "update": "The plugin has been updated.",
-            "desc": "You can now restart the server to apply the changes."
-          },
           "errors": {
             "PLUGIN_ALREADY_EXISTS": "Plugin with this code already exists. If you want to update the plugin, use the upload new version form from the plugin dropdown menu.",
             "PLUGIN_VERSION_IS_LOWER": "The version of the uploaded plugin is lower than the current version."
@@ -312,11 +379,7 @@
         "delete": {
           "submit": "Yes, delete plugin",
           "desc": "This action will delete <name></name> plugin created by <author></author> and all data associated with it.",
-          "info": "You may see the errors while the system is changing files. After the process is complete, you need to restart the server to apply the changes.",
-          "success": {
-            "title": "Plugin has been deleted.",
-            "desc": "You can now restart the server to apply the changes."
-          }
+          "info": "After the process is complete, you need to restart the server to apply the changes."
         },
         "download": {
           "title": "Download Plugin",
@@ -334,11 +397,26 @@
         }
       },
       "styles": {
+        "theme-editor": {
+          "save": "Save",
+          "desktop": "Desktop",
+          "tablet": "Tablet",
+          "mobile": "Mobile",
+          "logos": {
+            "title": "Logos",
+            "text": "Logo Text",
+            "logo_light": "Logo Light",
+            "logo_dark": "Logo Dark",
+            "width": "Width",
+            "title_mobile": "Logos (Mobile)"
+          }
+        },
         "nav": {
           "title": "Navigation",
           "href": "URL: {href}",
           "create": {
             "title": "Create Navigation",
+            "desc": "Create a new navigation for your website.",
             "success": "Navigation has been created.",
             "name": {
               "label": "Name"
@@ -392,7 +470,10 @@
         "table": {
           "key": "Key",
           "time_24": "24h Format",
-          "locale": "Locale"
+          "locale": "Locale",
+          "name": "Name",
+          "updated": "Updated",
+          "enabled": "Enabled"
         },
         "actions": {
           "create": {
@@ -404,7 +485,8 @@
             "code": {
               "label": "Code",
               "placeholder": "en",
-              "desc": "This code uses as a language identifier in your URL, like: /en/page"
+              "desc": "This code uses as a language identifier in your URL, like: /en/page",
+              "already_exists": "Language with this code already exists."
             },
             "timezone": {
               "label": "Timezone"
@@ -450,19 +532,43 @@
             "submit": "Yes, delete file"
           }
         }
+      },
+      "security": {
+        "spam": {
+          "title": "Spam Protection",
+          "captcha": {
+            "title": "Captcha",
+            "type": {
+              "title": "Type",
+              "none": {
+                "title": "None"
+              },
+              "recaptcha_desc": "Read more on <link>Google reCAPTCHA</link>.",
+              "recaptcha_v2_invisible": "reCAPTCHA v2 Invisible",
+              "recaptcha_v2_checkbox": "reCAPTCHA v2 Checkbox",
+              "recaptcha_v3": "reCAPTCHA v3",
+              "cloudflare_turnstile": {
+                "title": "Cloudflare Turnstile",
+                "desc": "Read more on <link>Cloudflare Turnstile</link>."
+              }
+            },
+            "site_key": "Site Key",
+            "secret_key": "Secret Key"
+          }
+        }
       }
     },
     "members": {
       "users": {
         "title": "Users List",
+        "desc": "Manage users on your website.",
         "search_placeholder": "Search by name or email...",
+        "name": "Name",
+        "email": "Email",
+        "group": "Group",
+        "joined": "Joined",
         "filters": {
           "groups": "Groups"
-        },
-        "table": {
-          "email": "Email",
-          "group": "Group",
-          "joined": "Joined"
         },
         "create": {
           "title": "Create User",
@@ -471,13 +577,19 @@
         "item": {
           "user_menu": "User Menu",
           "public_profile": "Public Profile",
+          "confirm_email": {
+            "title": "Confirm Email",
+            "success": "Email has been confirmed."
+          },
           "info": {
             "title": "Info User",
             "joined": "Joined",
-            "email": "Email"
+            "email": "Email",
+            "not_email_verified": "This user has not verified their email address."
           },
           "edit": {
             "title": "Edit User",
+            "group": "Group",
             "success": "User has been updated."
           },
           "delete": {
@@ -494,6 +606,9 @@
       },
       "groups": {
         "title": "Groups",
+        "desc": "Manage groups on your website.",
+        "name": "Name",
+        "updated": "Updated",
         "search_placeholder": "Search by name...",
         "default": "Default",
         "root": "Admin Root",
@@ -532,25 +647,14 @@
         }
       },
       "staff": {
-        "title": "Staff",
-        "unrestricted": "Unrestricted",
-        "restricted": "Restricted",
-        "user": "User",
-        "group": "Group",
-        "already_exists": "This permission is already on the list.",
-        "table": {
-          "administrator": "Administrator",
-          "moderator": "Moderator",
+        "shared": {
           "type": "Type",
           "updated": "Updated",
-          "permissions": "Permissions"
-        },
-        "create_edit": {
-          "type": {
-            "title": "Type",
-            "user": "User",
-            "group": "Group"
-          },
+          "permissions": "Permissions",
+          "restricted": "Restricted",
+          "user": "User",
+          "group": "Group",
+          "already_exists": "This permission is already on the list.",
           "unrestricted": {
             "title": "Unrestricted",
             "desc": "Unrestricted administrators have full access to the admin control panel (AdminCP)."
@@ -558,6 +662,8 @@
         },
         "moderators": {
           "title": "Moderators",
+          "desc": "Manage access to the moderator panel (ModCP).",
+          "moderator": "Moderator",
           "add": {
             "title": "Add Moderator",
             "success": "Moderator has been added"
@@ -568,11 +674,17 @@
             "success": "Permissions has been deleted"
           }
         },
-        "administrators": {
+        "admin": {
           "title": "Administrators",
+          "desc": "Manage access to the administrator panel (AdminCP).",
+          "administrator": "Administrator",
           "add": {
             "title": "Add Administrator",
             "success": "Administrator has been added"
+          },
+          "edit": {
+            "title": "Edit Administrator",
+            "success": "Administrator has been updated"
           },
           "delete": {
             "desc": "This action will deprive the user or users of this group of access to the administrator panel (AdminCP).",
@@ -581,9 +693,6 @@
           }
         }
       }
-    },
-    "configs": {
-      "mobile_not_supported": "This view is not supported on mobile devices."
     }
   }
 }

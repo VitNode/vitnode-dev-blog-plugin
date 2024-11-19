@@ -1,0 +1,31 @@
+{
+  "name": "shared",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "exports": {
+    "./*": {
+      "require": "./dist/*.js",
+      "import": "./dist/*.js",
+      "types": "./dist/*.d.ts"
+    }
+  },
+  "dependencies": {
+    "@nestjs/common": "^10.4.8",
+    "@nestjs/swagger": "^8.0.7"
+  },
+  "devDependencies": {
+    "@types/multer": "^1.4.12",
+    "@types/node": "^22.9.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "eslint-config-typescript-vitnode": "^0.0.10-canary.7",
+    "typescript": "^5.6.3",
+    "vitnode-shared": "^0.0.10-canary.7"
+  }
+}
