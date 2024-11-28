@@ -2,7 +2,10 @@
   "blog": {},
   "admin_blog": {
     "nav": {
-      "title": "Blog"
+      "title": "Blog",
+      "settings": "Settings",
+      "categories": "Categories",
+      "articles": "Articles"
     }
   }
 }

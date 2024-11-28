@@ -232,14 +232,15 @@
     "sign_in": {
       "title": "Login",
       "desc": "You don't have an account? <link></link>.",
+      "or": "or",
       "sign_up": "Sign Up",
       "email": "Email",
       "password": "Password",
-      "remember": {
-        "label": "Remember me",
-        "desc": "Not recommended on shared computers."
-      },
       "submit": "Log In",
+      "sso_first_login": {
+        "title": "Almost there!",
+        "desc": "Please complete your registration by entering your name."
+      },
       "error": {
         "title": "Invalid credentials",
         "desc": "The email address or password was incorrect. Please try again (make sure your caps lock is off)."
@@ -253,8 +254,6 @@
       "title": "Register",
       "desc": "You already have an account? <link></link>.",
       "sign_in": "Sign In",
-      "week_password": "Week",
-      "strong_password": "Strong",
       "email_invalid": "This email address is invalid.",
       "name": {
         "label": "Nickname",
@@ -269,7 +268,11 @@
       },
       "password": {
         "label": "Password",
-        "desc": "Min 8 characters, lowercase uppercase letter, number and special character."
+        "desc": "Password must have:",
+        "min_length": "At least 8 characters",
+        "uppercase": "At least one uppercase letter",
+        "number": "At least one number",
+        "special_char": "At least one special character"
       },
       "terms": {
         "label": "Accept terms and conditions",

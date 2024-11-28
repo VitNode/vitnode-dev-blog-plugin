@@ -6,7 +6,23 @@
   "description": "Write and publish your articles.",
   "support_url": "https://github.com/VitNode/vitnode_dev_blog_plugin/issues",
   "allow_default": true,
-  "nav": [],
+  "nav": [
+    {
+      "code": "articles",
+      "icon": "book-open-text",
+      "keywords": []
+    },
+    {
+      "code": "categories",
+      "icon": "boxes",
+      "keywords": []
+    },
+    {
+      "code": "settings",
+      "icon": "settings",
+      "keywords": []
+    }
+  ],
   "version": "0.0.1",
   "version_code": 1
 }

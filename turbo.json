@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [".env"],
   "ui": "tui",
   "tasks": {
     "build": {
@@ -13,6 +14,10 @@
     },
     "lint": {
       "dependsOn": ["^lint"]
+    },
+    "config:init": {
+      "dependsOn": ["^config:init"],
+      "cache": false
     },
     "lint:fix": {
       "dependsOn": ["^lint:fix"]
