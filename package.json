@@ -20,7 +20,7 @@
     }
   },
   "devDependencies": {
-    "eslint-config-typescript-vitnode": "0.0.10-canary.16",
+    "eslint-config-typescript-vitnode": "0.0.10-canary.23",
     "turbo": "^2.3.3"
   },
   "packageManager": "pnpm@9.12.2",

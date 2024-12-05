@@ -6,6 +6,18 @@
       "settings": "Settings",
       "categories": "Categories",
       "articles": "Articles"
+    },
+    "articles": {
+      "title": "Articles",
+      "desc": "Write and publish articles."
+    },
+    "categories": {
+      "title": "Categories",
+      "desc": "Set up categories for your articles."
+    },
+    "settings": {
+      "title": "Settings",
+      "desc": "Configure your blog settings."
     }
   }
 }

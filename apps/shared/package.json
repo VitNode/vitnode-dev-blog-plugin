@@ -16,16 +16,16 @@
     }
   },
   "dependencies": {
-    "@nestjs/common": "^10.4.10",
-    "@nestjs/swagger": "^8.0.7"
+    "@nestjs/common": "^10.4.13",
+    "@nestjs/swagger": "^8.1.0"
   },
   "devDependencies": {
     "@types/multer": "^1.4.12",
-    "@types/node": "^22.10.0",
+    "@types/node": "^22.10.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
-    "eslint-config-typescript-vitnode": "0.0.10-canary.16",
+    "eslint-config-typescript-vitnode": "0.0.10-canary.23",
     "typescript": "^5.7.2",
-    "vitnode-shared": "0.0.10-canary.16"
+    "vitnode-shared": "0.0.10-canary.23"
   }
 }
