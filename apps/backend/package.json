@@ -26,7 +26,7 @@
     "react": "19.0.0-rc.1",
     "react-dom": "19.0.0-rc.1",
     "reflect-metadata": "^0.2.2",
-    "vitnode-backend": "0.0.10-canary.23"
+    "vitnode-backend": "0.0.10-canary.24"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.4.8",
@@ -36,9 +36,9 @@
     "@types/node": "^22.10.1",
     "@types/react": "^18.3.13",
     "cross-env": "^7.0.3",
-    "eslint-config-typescript-vitnode": "0.0.10-canary.23",
+    "eslint-config-typescript-vitnode": "0.0.10-canary.24",
     "shared": "workspace:*",
     "typescript": "^5.7.2",
-    "vitnode-shared": "0.0.10-canary.23"
+    "vitnode-shared": "0.0.10-canary.24"
   }
 }
