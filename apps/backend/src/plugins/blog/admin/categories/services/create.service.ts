@@ -34,7 +34,8 @@ export class CreateCategoriesAdminBlogService {
       .values({
         code,
         color,
-      });
+      })
+      .returning();
 
     const nameWithI18n = await this.stringLanguageHelper.parse({
       item_id: item.id,

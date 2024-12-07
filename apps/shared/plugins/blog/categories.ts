@@ -11,30 +11,30 @@ export class CreateCategoriesAdminBlogBody {
   @IsString()
   code: string;
 
-  @ApiProperty({ type: [StringLanguage] })
-  @ArrayMinSize(1)
-  name: StringLanguage[];
-
   @ApiProperty()
   @IsString()
   color: string;
+
+  @ApiProperty({ type: [StringLanguage] })
+  @ArrayMinSize(1)
+  name: StringLanguage[];
 }
 
 export class CategoryBlog {
   @ApiProperty()
-  id: number;
-
-  @ApiProperty()
   code: string;
-
-  @ApiProperty({ type: [StringLanguage] })
-  name: StringLanguage[];
 
   @ApiProperty()
   color: string;
 
   @ApiProperty()
   created_at: Date;
+
+  @ApiProperty()
+  id: number;
+
+  @ApiProperty({ type: [StringLanguage] })
+  name: StringLanguage[];
 
   @ApiProperty()
   position: number;

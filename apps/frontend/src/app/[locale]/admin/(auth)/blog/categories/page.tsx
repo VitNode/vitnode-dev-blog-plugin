@@ -1,6 +1,21 @@
+import { CreateCategoryBlogAdmin } from '@/plugins/admin/templates/categories/actions/create';
+import { CategoriesBlogAdminView } from '@/plugins/admin/templates/categories/categories-blog-admin-view';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { CategoriesBlogObj, CategoriesBlogQuery } from 'shared/blog/categories';
+import { fetcher } from 'vitnode-frontend/api/fetcher';
+import { TranslationsProvider } from 'vitnode-frontend/components/translations-provider';
 import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
+
+const getData = async (query: CategoriesBlogQuery) => {
+  const { data } = await fetcher<CategoriesBlogObj, CategoriesBlogQuery>({
+    url: '/admin/blog/categories',
+    query,
+    cache: 'force-cache',
+  });
+
+  return data;
+};
 
 export const generateMetadata = async (): Promise<Metadata> => {
   const t = await getTranslations('admin_blog.categories');
@@ -11,11 +26,18 @@ export const generateMetadata = async (): Promise<Metadata> => {
 };
 
 export default async function Page() {
-  const t = await getTranslations('admin_blog.categories');
+  const [t, data] = await Promise.all([
+    getTranslations('admin_blog.categories'),
+    getData({}),
+  ]);
 
   return (
-    <HeaderContent desc={t('desc')} h1={t('title')}>
-      options
-    </HeaderContent>
+    <TranslationsProvider namespaces="admin_blog.categories">
+      <HeaderContent desc={t('desc')} h1={t('title')}>
+        <CreateCategoryBlogAdmin />
+      </HeaderContent>
+
+      <CategoriesBlogAdminView {...data} />
+    </TranslationsProvider>
   );
 }

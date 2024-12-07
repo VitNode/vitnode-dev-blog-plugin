@@ -13,7 +13,18 @@
     },
     "categories": {
       "title": "Categories",
-      "desc": "Set up categories for your articles."
+      "desc": "Set up categories for your articles.",
+      "create": {
+        "title": "Create Category",
+        "desc": "Create a new category.",
+        "name": "Name",
+        "code": {
+          "label": "Code",
+          "desc": "The code is used to identify the category in the URL."
+        },
+        "color": "Color",
+        "success": "Category created successfully."
+      }
     },
     "settings": {
       "title": "Settings",
