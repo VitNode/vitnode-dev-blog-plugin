@@ -1,15 +1,13 @@
-import { Body, Get, Post, Query } from '@nestjs/common';
+import { Body, Delete, Param, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import {
-  CategoriesBlogObj,
-  CategoriesBlogQuery,
   CategoryBlog,
   CreateCategoriesAdminBlogBody,
 } from 'shared/blog/categories';
 import { Controllers } from 'vitnode-backend/helpers/controller.decorator';
 
 import { CreateCategoriesAdminBlogService } from './services/create.service';
-import { ShowCategoriesAdminBlogService } from './services/show.service';
+import { DeleteCategoriesAdminBlogService } from './services/delete.service';
 
 @Controllers({
   plugin_name: 'Blog',
@@ -20,7 +18,7 @@ import { ShowCategoriesAdminBlogService } from './services/show.service';
 export class CategoriesAdminBlogController {
   constructor(
     private readonly createService: CreateCategoriesAdminBlogService,
-    private readonly showService: ShowCategoriesAdminBlogService,
+    private readonly deleteService: DeleteCategoriesAdminBlogService,
   ) {}
 
   @ApiCreatedResponse({ type: CategoryBlog, description: 'Created category' })
@@ -31,11 +29,9 @@ export class CategoriesAdminBlogController {
     return await this.createService.create(body);
   }
 
-  @ApiOkResponse({ type: CategoriesBlogObj, description: 'Show categories' })
-  @Get()
-  async showCategories(
-    @Query() body: CategoriesBlogQuery,
-  ): Promise<CategoriesBlogObj> {
-    return await this.showService.show(body);
+  @ApiOkResponse({ description: 'Deleted category' })
+  @Delete(':id')
+  async deleteCategories(@Param('id') id: string): Promise<void> {
+    await this.deleteService.delete(+id);
   }
 }

@@ -4,6 +4,7 @@ import {
   CategoryBlog,
   CreateCategoriesAdminBlogBody,
 } from 'shared/blog/categories';
+import { removeSpecialCharacters } from 'vitnode-backend/functions/special-characters';
 import { StringLanguageHelper } from 'vitnode-backend/helpers/string_language/helpers.service';
 
 import { blog_categories } from '../../database/schema/categories';
@@ -17,12 +18,12 @@ export class CreateCategoriesAdminBlogService {
 
   async create({
     name,
-    code,
+    slug,
     color,
   }: CreateCategoriesAdminBlogBody): Promise<CategoryBlog> {
     const category =
       await this.databaseService.db.query.blog_categories.findFirst({
-        where: (table, { eq }) => eq(table.code, code),
+        where: (table, { eq }) => eq(table.slug, slug),
       });
 
     if (category) {
@@ -32,7 +33,7 @@ export class CreateCategoriesAdminBlogService {
     const [item] = await this.databaseService.db
       .insert(blog_categories)
       .values({
-        code,
+        slug: removeSpecialCharacters(slug),
         color,
       })
       .returning();

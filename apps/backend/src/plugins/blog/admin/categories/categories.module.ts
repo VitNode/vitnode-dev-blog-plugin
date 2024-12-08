@@ -2,10 +2,13 @@ import { Module } from '@nestjs/common';
 
 import { CategoriesAdminBlogController } from './categories.controller';
 import { CreateCategoriesAdminBlogService } from './services/create.service';
-import { ShowCategoriesAdminBlogService } from './services/show.service';
+import { DeleteCategoriesAdminBlogService } from './services/delete.service';
 
 @Module({
-  providers: [CreateCategoriesAdminBlogService, ShowCategoriesAdminBlogService],
+  providers: [
+    CreateCategoriesAdminBlogService,
+    DeleteCategoriesAdminBlogService,
+  ],
   controllers: [CategoriesAdminBlogController],
 })
 export class CategoriesAdminBlogModule {}

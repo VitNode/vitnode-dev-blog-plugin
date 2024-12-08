@@ -9,21 +9,18 @@ import {
 export class CreateCategoriesAdminBlogBody {
   @ApiProperty()
   @IsString()
-  code: string;
-
-  @ApiProperty()
-  @IsString()
   color: string;
 
   @ApiProperty({ type: [StringLanguage] })
   @ArrayMinSize(1)
   name: StringLanguage[];
+
+  @ApiProperty()
+  @IsString()
+  slug: string;
 }
 
 export class CategoryBlog {
-  @ApiProperty()
-  code: string;
-
   @ApiProperty()
   color: string;
 
@@ -38,6 +35,9 @@ export class CategoryBlog {
 
   @ApiProperty()
   position: number;
+
+  @ApiProperty()
+  slug: string;
 }
 
 export class CategoriesBlogQuery extends PaginationQuery {}

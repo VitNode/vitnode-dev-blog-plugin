@@ -14,5 +14,5 @@ export const mutationApi = async (body: CreateCategoriesAdminBlogBody) => {
     body: body,
   });
 
-  revalidatePath('[locale]/admin/(auth)/blog/categories', 'page');
+  revalidatePath('/[locale]/admin/(auth)/blog/categories', 'page');
 };

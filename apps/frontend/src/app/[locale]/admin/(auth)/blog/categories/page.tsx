@@ -9,7 +9,7 @@ import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
 const getData = async (query: CategoriesBlogQuery) => {
   const { data } = await fetcher<CategoriesBlogObj, CategoriesBlogQuery>({
-    url: '/admin/blog/categories',
+    url: '/blog/categories',
     query,
     cache: 'force-cache',
   });

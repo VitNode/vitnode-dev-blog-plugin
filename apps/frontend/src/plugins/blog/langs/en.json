@@ -18,12 +18,18 @@
         "title": "Create Category",
         "desc": "Create a new category.",
         "name": "Name",
-        "code": {
-          "label": "Code",
-          "desc": "The code is used to identify the category in the URL."
+        "slug": {
+          "label": "Slug",
+          "desc": "The slug is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens."
         },
         "color": "Color",
         "success": "Category created successfully."
+      },
+      "delete": {
+        "title": "Delete Category",
+        "desc": "This action will permanently delete <name></name> category and all its articles.",
+        "success": "Category deleted successfully.",
+        "submit": "Delete Category"
       }
     },
     "settings": {

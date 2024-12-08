@@ -18,7 +18,7 @@ export const CreateEditCategoryBlogAdmin = () => {
   const { convertText } = useTextLang();
   const formSchema = z.object({
     name: zodLanguageInput.min(1),
-    code: z.string().min(1),
+    slug: z.string().min(1),
     color: z.string().max(20),
   });
 
@@ -46,9 +46,9 @@ export const CreateEditCategoryBlogAdmin = () => {
           component: AutoFormStringLanguageInput,
         },
         {
-          id: 'code',
-          label: t('code.label'),
-          description: t('code.desc'),
+          id: 'slug',
+          label: t('slug.label'),
+          description: t('slug.desc'),
           component: AutoFormInput,
         },
         {

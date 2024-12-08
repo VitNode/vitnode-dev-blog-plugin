@@ -2,10 +2,10 @@
 
 import { CategoriesBlogObj } from 'shared/blog/categories';
 import { DragAndDropSortableList } from 'vitnode-frontend/components/drag&drop/sortable-list/list';
-import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
+
+import { ItemCategoriesBlogAdmin } from './item/item';
 
 export const CategoriesBlogAdminView = ({ edges }: CategoriesBlogObj) => {
-  const { convertText } = useTextLang();
   const data = edges.map(edge => ({
     ...edge,
     children: [],
@@ -13,10 +13,10 @@ export const CategoriesBlogAdminView = ({ edges }: CategoriesBlogObj) => {
 
   return (
     <DragAndDropSortableList
-      componentItem={data => {
-        return <div>{convertText(data.name)}</div>;
-      }}
+      componentItem={data => <ItemCategoriesBlogAdmin {...data} />}
       data={data}
+      maxDepth={0}
+      onDragEnd={() => {}}
     />
   );
 };

@@ -4,10 +4,10 @@ import { CategoriesBlogObj, CategoriesBlogQuery } from 'shared/blog/categories';
 import { StringLanguageHelper } from 'vitnode-backend/helpers/string_language/helpers.service';
 import { SortDirectionEnum } from 'vitnode-shared/utils/pagination.enum';
 
-import { blog_categories } from '../../database/schema/categories';
+import { blog_categories } from '../../admin/database/schema/categories';
 
 @Injectable()
-export class ShowCategoriesAdminBlogService {
+export class ShowCategoriesBlogService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly stringLanguageHelper: StringLanguageHelper,
