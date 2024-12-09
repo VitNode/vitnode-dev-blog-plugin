@@ -24,8 +24,8 @@
     "@types/node": "^22.10.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
-    "eslint-config-typescript-vitnode": "0.0.10-canary.25",
+    "eslint-config-typescript-vitnode": "0.0.10-canary.26",
     "typescript": "^5.7.2",
-    "vitnode-shared": "0.0.10-canary.25"
+    "vitnode-shared": "0.0.10-canary.26"
   }
 }
