@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       eslint-config-typescript-vitnode:
-        specifier: 0.0.10-canary.26
-        version: 0.0.10-canary.26(@types/eslint@9.6.1)(jiti@1.21.6)(prettier@3.3.3)(typescript@5.7.2)
+        specifier: 0.0.10-canary.29
+        version: 0.0.10-canary.29(@types/eslint@9.6.1)(jiti@1.21.6)(prettier@3.3.3)(typescript@5.7.2)
       turbo:
         specifier: ^2.3.3
         version: 2.3.3
@@ -60,8 +60,8 @@ importers:
         specifier: ^0.2.2
         version: 0.2.2
       vitnode-backend:
-        specifier: 0.0.10-canary.26
-        version: 0.0.10-canary.26(@nestjs/common@10.4.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.13)(@nestjs/platform-express@10.4.13)(@nestjs/schedule@4.1.1(@nestjs/common@10.4.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.13))(@react-email/components@0.0.29(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(class-transformer@0.5.1)(class-validator@0.14.1)(express@4.21.1)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)(reflect-metadata@0.2.2)
+        specifier: 0.0.10-canary.29
+        version: 0.0.10-canary.29(@nestjs/common@10.4.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.13)(@nestjs/platform-express@10.4.13)(@nestjs/schedule@4.1.1(@nestjs/common@10.4.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.13))(@react-email/components@0.0.29(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(class-transformer@0.5.1)(class-validator@0.14.1)(express@4.21.1)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)(reflect-metadata@0.2.2)
     devDependencies:
       '@nestjs/cli':
         specifier: ^10.4.8
@@ -85,8 +85,8 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       eslint-config-typescript-vitnode:
-        specifier: 0.0.10-canary.26
-        version: 0.0.10-canary.26(@types/eslint@9.6.1)(jiti@1.21.6)(prettier@3.3.3)(typescript@5.7.2)
+        specifier: 0.0.10-canary.29
+        version: 0.0.10-canary.29(@types/eslint@9.6.1)(jiti@1.21.6)(prettier@3.3.3)(typescript@5.7.2)
       shared:
         specifier: workspace:*
         version: link:../shared
@@ -94,8 +94,8 @@ importers:
         specifier: ^5.7.2
         version: 5.7.2
       vitnode-shared:
-        specifier: 0.0.10-canary.26
-        version: 0.0.10-canary.26(@nestjs/core@10.4.13)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
+        specifier: 0.0.10-canary.29
+        version: 0.0.10-canary.29(@nestjs/core@10.4.13)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
 
   apps/frontend:
     dependencies:
@@ -130,8 +130,8 @@ importers:
         specifier: ^1.7.0
         version: 1.7.0(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)
       vitnode-frontend:
-        specifier: 0.0.10-canary.26
-        version: 0.0.10-canary.26(@hookform/resolvers@3.9.1(react-hook-form@7.53.2(react@19.0.0-rc.1)))(@nestjs/core@10.4.13)(@tiptap/core@2.10.3(@tiptap/pm@2.10.3))(@tiptap/extension-code-block@2.10.3(@tiptap/core@2.10.3(@tiptap/pm@2.10.3))(@tiptap/pm@2.10.3))(@types/react-dom@18.3.1)(@types/react@18.3.13)(class-transformer@0.5.1)(class-validator@0.14.1)(date-fns@3.6.0)(highlight.js@11.10.0)(lucide-react@0.466.0(react@19.0.0-rc.1))(next-intl@3.25.3(next@15.0.3(@babel/core@7.26.0)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(react@19.0.0-rc.1))(next@15.0.3(@babel/core@7.26.0)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react-hook-form@7.53.2(react@19.0.0-rc.1))(react@19.0.0-rc.1)(recharts@2.14.1(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(reflect-metadata@0.2.2)(rxjs@7.8.1)(sonner@1.7.0(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(tailwindcss@3.4.16)(typescript@5.7.2)(zod@3.23.8)
+        specifier: 0.0.10-canary.29
+        version: 0.0.10-canary.29(@hookform/resolvers@3.9.1(react-hook-form@7.53.2(react@19.0.0-rc.1)))(@nestjs/core@10.4.13)(@tiptap/core@2.10.3(@tiptap/pm@2.10.3))(@tiptap/extension-code-block@2.10.3(@tiptap/core@2.10.3(@tiptap/pm@2.10.3))(@tiptap/pm@2.10.3))(@types/react-dom@18.3.1)(@types/react@18.3.13)(class-transformer@0.5.1)(class-validator@0.14.1)(date-fns@3.6.0)(highlight.js@11.10.0)(lucide-react@0.466.0(react@19.0.0-rc.1))(next-intl@3.25.3(next@15.0.3(@babel/core@7.26.0)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(react@19.0.0-rc.1))(next@15.0.3(@babel/core@7.26.0)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react-hook-form@7.53.2(react@19.0.0-rc.1))(react@19.0.0-rc.1)(recharts@2.14.1(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(reflect-metadata@0.2.2)(rxjs@7.8.1)(sonner@1.7.0(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(tailwindcss@3.4.16)(typescript@5.7.2)(zod@3.23.8)
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -149,8 +149,8 @@ importers:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
       eslint-config-typescript-vitnode:
-        specifier: 0.0.10-canary.26
-        version: 0.0.10-canary.26(@types/eslint@9.6.1)(jiti@1.21.6)(prettier@3.3.3)(typescript@5.7.2)
+        specifier: 0.0.10-canary.29
+        version: 0.0.10-canary.29(@types/eslint@9.6.1)(jiti@1.21.6)(prettier@3.3.3)(typescript@5.7.2)
       postcss:
         specifier: ^8.4.49
         version: 8.4.49
@@ -164,8 +164,8 @@ importers:
         specifier: ^5.7.2
         version: 5.7.2
       vitnode-shared:
-        specifier: 0.0.10-canary.26
-        version: 0.0.10-canary.26(@nestjs/core@10.4.13)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
+        specifier: 0.0.10-canary.29
+        version: 0.0.10-canary.29(@nestjs/core@10.4.13)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
 
   apps/shared:
     dependencies:
@@ -189,14 +189,14 @@ importers:
         specifier: ^0.14.1
         version: 0.14.1
       eslint-config-typescript-vitnode:
-        specifier: 0.0.10-canary.26
-        version: 0.0.10-canary.26(@types/eslint@9.6.1)(jiti@1.21.6)(prettier@3.3.3)(typescript@5.7.2)
+        specifier: 0.0.10-canary.29
+        version: 0.0.10-canary.29(@types/eslint@9.6.1)(jiti@1.21.6)(prettier@3.3.3)(typescript@5.7.2)
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
       vitnode-shared:
-        specifier: 0.0.10-canary.26
-        version: 0.0.10-canary.26(@nestjs/core@10.4.13)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
+        specifier: 0.0.10-canary.29
+        version: 0.0.10-canary.29(@nestjs/core@10.4.13)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
 
 packages:
 
@@ -3238,8 +3238,8 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-config-typescript-vitnode@0.0.10-canary.26:
-    resolution: {integrity: sha512-Tj39XtTzJ1bL3s0HfK6KlsRjAT6u03Y6JKGMX4zE5+duTar8DZpem/YMVHBtvfIkQfKwz3cZ6itj23mCxuN/rw==}
+  eslint-config-typescript-vitnode@0.0.10-canary.29:
+    resolution: {integrity: sha512-8uPEt4f5N4hif9WbJPcYuVFmlV3yJnxirlrVzIrrMMWPe0yQznXEjhFExfMODDRN4wQIAsjpyc5iE4RnYdSD0w==}
     peerDependencies:
       typescript: ^5.5.4
 
@@ -5456,8 +5456,8 @@ packages:
   victory-vendor@36.9.2:
     resolution: {integrity: sha512-PnpQQMuxlwYdocC8fIJqVXvkeViHYzotI+NJrCuav0ZYFoq912ZHBk3mCeuj+5/VpodOjPe1z0Fk2ihgzlXqjQ==}
 
-  vitnode-backend@0.0.10-canary.26:
-    resolution: {integrity: sha512-zgyGZppNvujwD6PrIs/g9D7u8YJck0Vjsl3JOj5brIZT8H2vwD8mzcWVMU27FZLjf/Vnjabnmp0+ey8ZnNK45g==}
+  vitnode-backend@0.0.10-canary.29:
+    resolution: {integrity: sha512-dtf+5Xz/Au2tTrGdTDvjOly68rDMkXanPjmIQmpTZwgskzjDfjINNBYZv/eWXkyLSwpyYZL4xbOscFVjvLjYvw==}
     hasBin: true
     peerDependencies:
       '@nestjs/common': ^10.4.13
@@ -5470,8 +5470,8 @@ packages:
       react: ^19.0.0
       react-dom: ^19.0.0
 
-  vitnode-frontend@0.0.10-canary.26:
-    resolution: {integrity: sha512-Rsw54dNlY//lVi/TstantMUWpc0aAqCCQCPsy5qo3Em5OWtzyX+AWZHWSVUnPQDC0fL29XTK/uEeUB3IaklqgA==}
+  vitnode-frontend@0.0.10-canary.29:
+    resolution: {integrity: sha512-cOf0zxr+7CJF04GhJQ7GtMLIDT/vjqz4G/I8OBWgew0qy8+MHWke9EpselvqGKVO3DaCuSNCQ3CTmjkG9FbsEg==}
     hasBin: true
     peerDependencies:
       '@hookform/resolvers': ^3.9.1
@@ -5486,8 +5486,8 @@ packages:
       typescript: ^5.7.2
       zod: ^3.23.8
 
-  vitnode-shared@0.0.10-canary.26:
-    resolution: {integrity: sha512-sgBfQQc4hIRArW917Pmy5GS5YCjbvBGHPdogJT6ZszwJtn4nblMO/2u0DWbiaFqqIfETFAH2MbIePhQBSUpExA==}
+  vitnode-shared@0.0.10-canary.29:
+    resolution: {integrity: sha512-EYJcXx5EB+MTuA1VhKbchc6FG5fiyGw/7NEN+3FTNR5D74vz20vp5hxyehDQoqYd/4JnqiCRqvVjgQjkTMuuwA==}
     peerDependencies:
       class-transformer: ^0.5.1
       class-validator: ^0.14.1
@@ -8627,7 +8627,7 @@ snapshots:
     dependencies:
       eslint: 9.14.0(jiti@1.21.6)
 
-  eslint-config-typescript-vitnode@0.0.10-canary.26(@types/eslint@9.6.1)(jiti@1.21.6)(prettier@3.3.3)(typescript@5.7.2):
+  eslint-config-typescript-vitnode@0.0.10-canary.29(@types/eslint@9.6.1)(jiti@1.21.6)(prettier@3.3.3)(typescript@5.7.2):
     dependencies:
       '@eslint/js': 9.14.0
       eslint: 9.14.0(jiti@1.21.6)
@@ -11045,7 +11045,7 @@ snapshots:
       d3-time: 3.1.0
       d3-timer: 3.0.1
 
-  vitnode-backend@0.0.10-canary.26(@nestjs/common@10.4.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.13)(@nestjs/platform-express@10.4.13)(@nestjs/schedule@4.1.1(@nestjs/common@10.4.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.13))(@react-email/components@0.0.29(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(class-transformer@0.5.1)(class-validator@0.14.1)(express@4.21.1)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)(reflect-metadata@0.2.2):
+  vitnode-backend@0.0.10-canary.29(@nestjs/common@10.4.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.13)(@nestjs/platform-express@10.4.13)(@nestjs/schedule@4.1.1(@nestjs/common@10.4.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.13))(@react-email/components@0.0.29(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(class-transformer@0.5.1)(class-validator@0.14.1)(express@4.21.1)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)(reflect-metadata@0.2.2):
     dependencies:
       '@nestjs/common': 10.4.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
       '@nestjs/config': 3.3.0(@nestjs/common@10.4.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(rxjs@7.8.1)
@@ -11069,7 +11069,7 @@ snapshots:
       sharp: 0.33.5
       tar: 7.4.3
       ua-parser-js: 2.0.0
-      vitnode-shared: 0.0.10-canary.26(@nestjs/core@10.4.13)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
+      vitnode-shared: 0.0.10-canary.29(@nestjs/core@10.4.13)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
     transitivePeerDependencies:
       - '@fastify/static'
       - express
@@ -11077,7 +11077,7 @@ snapshots:
       - pg-native
       - reflect-metadata
 
-  vitnode-frontend@0.0.10-canary.26(@hookform/resolvers@3.9.1(react-hook-form@7.53.2(react@19.0.0-rc.1)))(@nestjs/core@10.4.13)(@tiptap/core@2.10.3(@tiptap/pm@2.10.3))(@tiptap/extension-code-block@2.10.3(@tiptap/core@2.10.3(@tiptap/pm@2.10.3))(@tiptap/pm@2.10.3))(@types/react-dom@18.3.1)(@types/react@18.3.13)(class-transformer@0.5.1)(class-validator@0.14.1)(date-fns@3.6.0)(highlight.js@11.10.0)(lucide-react@0.466.0(react@19.0.0-rc.1))(next-intl@3.25.3(next@15.0.3(@babel/core@7.26.0)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(react@19.0.0-rc.1))(next@15.0.3(@babel/core@7.26.0)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react-hook-form@7.53.2(react@19.0.0-rc.1))(react@19.0.0-rc.1)(recharts@2.14.1(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(reflect-metadata@0.2.2)(rxjs@7.8.1)(sonner@1.7.0(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(tailwindcss@3.4.16)(typescript@5.7.2)(zod@3.23.8):
+  vitnode-frontend@0.0.10-canary.29(@hookform/resolvers@3.9.1(react-hook-form@7.53.2(react@19.0.0-rc.1)))(@nestjs/core@10.4.13)(@tiptap/core@2.10.3(@tiptap/pm@2.10.3))(@tiptap/extension-code-block@2.10.3(@tiptap/core@2.10.3(@tiptap/pm@2.10.3))(@tiptap/pm@2.10.3))(@types/react-dom@18.3.1)(@types/react@18.3.13)(class-transformer@0.5.1)(class-validator@0.14.1)(date-fns@3.6.0)(highlight.js@11.10.0)(lucide-react@0.466.0(react@19.0.0-rc.1))(next-intl@3.25.3(next@15.0.3(@babel/core@7.26.0)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(react@19.0.0-rc.1))(next@15.0.3(@babel/core@7.26.0)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react-hook-form@7.53.2(react@19.0.0-rc.1))(react@19.0.0-rc.1)(recharts@2.14.1(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(reflect-metadata@0.2.2)(rxjs@7.8.1)(sonner@1.7.0(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(tailwindcss@3.4.16)(typescript@5.7.2)(zod@3.23.8):
     dependencies:
       '@dnd-kit/core': 6.3.1(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)
       '@dnd-kit/sortable': 10.0.0(@dnd-kit/core@6.3.1(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(react@19.0.0-rc.1)
@@ -11150,7 +11150,7 @@ snapshots:
       typescript: 5.7.2
       use-debounce: 10.0.4(react@19.0.0-rc.1)
       vaul: 1.1.1(@types/react-dom@18.3.1)(@types/react@18.3.13)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)
-      vitnode-shared: 0.0.10-canary.26(@nestjs/core@10.4.13)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
+      vitnode-shared: 0.0.10-canary.29(@nestjs/core@10.4.13)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
       zod: 3.23.8
     transitivePeerDependencies:
       - '@fastify/static'
@@ -11167,7 +11167,7 @@ snapshots:
       - rxjs
       - tailwindcss
 
-  vitnode-shared@0.0.10-canary.26(@nestjs/core@10.4.13)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1):
+  vitnode-shared@0.0.10-canary.29(@nestjs/core@10.4.13)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1):
     dependencies:
       '@nestjs/common': 10.4.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
       '@nestjs/swagger': 8.1.0(@nestjs/common@10.4.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.13)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)

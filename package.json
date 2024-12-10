@@ -10,12 +10,12 @@
     "db": "turbo db",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
-    "docker:dev": "docker compose -f ./docker-compose-dev.yml -p vitnode-dev-vitnode-page up -d",
-    "docker:prod": "docker compose -f ./docker-compose.yml -p vitnode-prod-vitnode-page up -d"
+    "docker:dev": "docker compose -f ./docker-compose-dev.yml -p vitnode-dev-blog up -d",
+    "docker:prod": "docker compose -f ./docker-compose.yml -p vitnode-prod-blog up -d"
   },
   "overrides": {},
   "devDependencies": {
-    "eslint-config-typescript-vitnode": "0.0.10-canary.26",
+    "eslint-config-typescript-vitnode": "0.0.10-canary.29",
     "turbo": "^2.3.3"
   },
   "packageManager": "pnpm@9.12.2",

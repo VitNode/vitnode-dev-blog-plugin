@@ -497,7 +497,6 @@
         "table": {
           "key": "Key",
           "time_24": "24h Format",
-          "locale": "Locale",
           "name": "Name",
           "updated": "Updated",
           "enabled": "Enabled"
@@ -521,9 +520,6 @@
             "time_24": {
               "label": "24h Time Format",
               "desc": "Shows 24h time format instead of 12h."
-            },
-            "locale": {
-              "label": "Locale"
             },
             "allow_in_input": {
               "label": "Allow in Input",

@@ -1,8 +1,9 @@
 import { CategoriesBlogObj } from 'shared/blog/categories';
+import { DragAndDropSortableItem } from 'vitnode-frontend/components/drag&drop/sortable-list/list';
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
+import { Link } from 'vitnode-frontend/navigation';
 
 import { DeleteItemCategoriesBlogAdmin } from './delete/delete';
-import { Link } from 'vitnode-frontend/navigation';
 
 export const ItemCategoriesBlogAdmin = ({
   name,
@@ -13,7 +14,10 @@ export const ItemCategoriesBlogAdmin = ({
   const { convertText } = useTextLang();
 
   return (
-    <div className="flex flex-1 items-center justify-between gap-2">
+    <DragAndDropSortableItem
+      actions={<DeleteItemCategoriesBlogAdmin id={id} name={name} />}
+      className="flex flex-1 items-center justify-between gap-2"
+    >
       <div className="flex items-center gap-4">
         <div
           className="size-6 rounded-lg bg-[--color-category]"
@@ -26,17 +30,12 @@ export const ItemCategoriesBlogAdmin = ({
         <div className="flex flex-col">
           <span>{convertText(name)}</span>
           <Link
+            className="text-sm"
             href={`/blog/category/${slug}`}
             target="_blank"
-            className="text-sm"
           >{`/blog/category/${slug}`}</Link>
         </div>
       </div>
-
-      <div>
-        <DeleteItemCategoriesBlogAdmin id={id} name={name} />
-        <DeleteItemCategoriesBlogAdmin id={id} name={name} />
-      </div>
-    </div>
+    </DragAndDropSortableItem>
   );
 };
