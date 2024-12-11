@@ -24,7 +24,7 @@ export class ShowCategoriesBlogService {
       first,
       last,
       defaultSortBy: {
-        direction: SortDirectionEnum.desc,
+        direction: SortDirectionEnum.asc,
         column: 'position',
       },
       query: async args =>

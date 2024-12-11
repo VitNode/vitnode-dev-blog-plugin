@@ -20,10 +20,14 @@
         "name": "Name",
         "slug": {
           "label": "Slug",
-          "desc": "The slug is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens."
+          "desc": "The slug is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.",
+          "category_already_exists": "This category already exists. Please choose another slug."
         },
         "color": "Color",
         "success": "Category created successfully."
+      },
+      "edit": {
+        "title": "Edit Category"
       },
       "delete": {
         "title": "Delete Category",

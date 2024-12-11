@@ -1,4 +1,6 @@
 import { useTranslations } from 'next-intl';
+import { UseFormReturn } from 'react-hook-form';
+import { CategoriesBlogObj } from 'shared/blog/categories';
 import { toast } from 'sonner';
 import { AutoForm } from 'vitnode-frontend/components/form/auto-form';
 import { AutoFormColorPicker } from 'vitnode-frontend/components/form/fields/color-picker';
@@ -9,32 +11,75 @@ import { zodLanguageInput } from 'vitnode-frontend/helpers/zod';
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 import { z } from 'zod';
 
-import { mutationApi } from './mutation-api';
+import { createMutationApi } from './create-mutation-api';
+import { editMutationApi } from './edit-mutation-api';
 
-export const CreateEditCategoryBlogAdmin = () => {
+export const CreateEditCategoryBlogAdmin = ({
+  data,
+}: {
+  data?: CategoriesBlogObj['edges'][0];
+}) => {
   const t = useTranslations('admin_blog.categories.create');
   const tErrors = useTranslations('core.global.errors');
   const { setOpen } = useDialog();
   const { convertText } = useTextLang();
   const formSchema = z.object({
-    name: zodLanguageInput.min(1),
-    slug: z.string().min(1),
-    color: z.string().max(20),
+    name: zodLanguageInput.min(1).default(data?.name ?? []),
+    slug: z
+      .string()
+      .min(1)
+      .default(data?.slug ?? ''),
+    color: z
+      .string()
+      .min(1)
+      .max(20)
+      .default(data?.color ?? ''),
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      await mutationApi(values);
-      setOpen?.(false);
-
-      toast.success(t('success'), {
-        description: convertText(values.name),
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>,
+    form: UseFormReturn<z.infer<typeof formSchema>>,
+  ) => {
+    let error = '';
+    if (data) {
+      const mutation = await editMutationApi({
+        ...values,
+        id: data.id,
+        position: data.position,
       });
-    } catch (_) {
+
+      if (mutation?.message) {
+        error = mutation.message;
+      }
+    } else {
+      const mutation = await createMutationApi(values);
+
+      if (mutation?.message) {
+        error = mutation.message;
+      }
+    }
+
+    if (error) {
+      if (error === 'CATEGORY_ALREADY_EXISTS') {
+        form.setError('slug', {
+          message: t('slug.category_already_exists'),
+        });
+
+        return;
+      }
+
       toast.error(tErrors('title'), {
         description: tErrors('internal_server_error'),
       });
+
+      return;
     }
+
+    setOpen?.(false);
+
+    toast.success(t('success'), {
+      description: convertText(values.name),
+    });
   };
 
   return (

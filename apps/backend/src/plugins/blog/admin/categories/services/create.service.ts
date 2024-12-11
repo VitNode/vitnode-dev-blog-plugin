@@ -27,14 +27,20 @@ export class CreateCategoriesAdminBlogService {
       });
 
     if (category) {
-      throw new ConflictException('Category already exists');
+      throw new ConflictException('CATEGORY_ALREADY_EXISTS');
     }
+
+    const getLastPosition =
+      await this.databaseService.db.query.blog_categories.findFirst({
+        orderBy: (table, { desc }) => desc(table.position),
+      });
 
     const [item] = await this.databaseService.db
       .insert(blog_categories)
       .values({
         slug: removeSpecialCharacters(slug),
         color,
+        position: getLastPosition ? getLastPosition.position + 1 : 0,
       })
       .returning();
 

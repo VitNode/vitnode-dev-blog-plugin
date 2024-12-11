@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ArrayMinSize, IsString } from 'class-validator';
+import { ArrayMinSize, IsNumber, IsString } from 'class-validator';
 import { StringLanguage } from 'vitnode-shared/string-language.dto';
 import {
   PaginationObj,
@@ -18,6 +18,12 @@ export class CreateCategoriesAdminBlogBody {
   @ApiProperty()
   @IsString()
   slug: string;
+}
+
+export class EditCategoriesAdminBlogBody extends CreateCategoriesAdminBlogBody {
+  @ApiProperty()
+  @IsNumber()
+  position: number;
 }
 
 export class CategoryBlog {
