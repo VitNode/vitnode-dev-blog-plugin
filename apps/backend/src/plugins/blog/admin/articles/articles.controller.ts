@@ -1,12 +1,17 @@
-import { Body, Post } from '@nestjs/common';
-import { ApiCreatedResponse } from '@nestjs/swagger';
+import { Body, Get, Post, Query, UploadedFiles } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import {
+  ArticlesAdminBlogObj,
   ArticlesBlog,
+  ArticlesBlogQuery,
   CreateArticlesAdminBlogBody,
 } from 'shared/blog/articles';
 import { Controllers } from 'vitnode-backend/helpers/controller.decorator';
+import { FilesValidationPipe } from 'vitnode-backend/helpers/files/files.pipe';
+import { UploadFilesMethod } from 'vitnode-backend/helpers/upload-files.decorator';
 
 import { CreateArticlesAdminBlogService } from './services/create.service';
+import { ShowArticlesAdminBlogService } from './services/show.service';
 
 @Controllers({
   plugin_name: 'Blog',
@@ -15,13 +20,39 @@ import { CreateArticlesAdminBlogService } from './services/create.service';
   isAdmin: true,
 })
 export class ArticlesAdminBlogController {
-  constructor(private readonly createService: CreateArticlesAdminBlogService) {}
+  constructor(
+    private readonly createService: CreateArticlesAdminBlogService,
+    private readonly showService: ShowArticlesAdminBlogService,
+  ) {}
 
   @ApiCreatedResponse({ type: ArticlesBlog, description: 'Created article' })
   @Post()
+  @UploadFilesMethod({ fields: ['image'] })
   async createArticle(
+    @UploadedFiles(
+      new FilesValidationPipe({
+        icon: {
+          maxSize: 1024 * 1024 * 2, // 2 MB
+          acceptMimeType: ['image/png', 'image/jpeg', 'image/webp'],
+          isOptional: true,
+          maxCount: 1,
+        },
+      }),
+    )
+    files: Pick<CreateArticlesAdminBlogBody, 'image'>,
     @Body() body: CreateArticlesAdminBlogBody,
   ): Promise<ArticlesBlog> {
-    return await this.createService.create(body);
+    return await this.createService.create({ body, files });
+  }
+
+  @ApiOkResponse({
+    type: ArticlesAdminBlogObj,
+    description: 'Show articles for admin',
+  })
+  @Get()
+  async showArticles(
+    @Query() body: ArticlesBlogQuery,
+  ): Promise<ArticlesAdminBlogObj> {
+    return await this.showService.show(body);
   }
 }

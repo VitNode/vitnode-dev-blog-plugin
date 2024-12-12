@@ -1,14 +1,14 @@
 import { DatabaseService } from '@/database/database.service';
 import { Injectable } from '@nestjs/common';
-import { ArticlesBlogObj, ArticlesBlogQuery } from 'shared/blog/articles';
+import { ArticlesAdminBlogObj, ArticlesBlogQuery } from 'shared/blog/articles';
 import { StringLanguageHelper } from 'vitnode-backend/helpers/string_language/helpers.service';
 import { SortDirectionEnum } from 'vitnode-shared/utils/pagination.enum';
 
-import { blog_articles } from '../../admin/database/schema/articles';
-import { blog_categories } from '../../admin/database/schema/categories';
+import { blog_articles } from '../../database/schema/articles';
+import { blog_categories } from '../../database/schema/categories';
 
 @Injectable()
-export class ShowArticlesBlogService {
+export class ShowArticlesAdminBlogService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly stringLanguageHelper: StringLanguageHelper,
@@ -18,7 +18,7 @@ export class ShowArticlesBlogService {
     cursor,
     first,
     last,
-  }: ArticlesBlogQuery): Promise<ArticlesBlogObj> {
+  }: ArticlesBlogQuery): Promise<ArticlesAdminBlogObj> {
     const pagination = await this.databaseService.paginationCursor({
       cursor,
       database: blog_articles,
@@ -31,12 +31,6 @@ export class ShowArticlesBlogService {
       query: async args =>
         await this.databaseService.db.query.blog_articles.findMany({
           ...args,
-          where: (table, { and, gte, eq }) =>
-            and(
-              args.where,
-              gte(table.published_at, new Date()),
-              eq(table.is_draft, false),
-            ),
           with: {
             category: true,
           },
@@ -51,7 +45,7 @@ export class ShowArticlesBlogService {
       variables: ['title', 'content'],
     });
 
-    const edges: ArticlesBlogObj['edges'] = await Promise.all(
+    const edges: ArticlesAdminBlogObj['edges'] = await Promise.all(
       pagination.edges.map(async edge => {
         const currentI18n = i18n.filter(item => item.item_id === edge.id);
 
@@ -89,21 +83,22 @@ export class ShowArticlesBlogService {
         orderBy: (table, { asc }) => asc(table.position),
       });
 
-    const categoriesEdges: ArticlesBlogObj['categories'] = await Promise.all(
-      categories.map(async category => {
-        const i18n = await this.stringLanguageHelper.get({
-          item_ids: [category.id],
-          database: blog_categories,
-          plugin_code: 'blog',
-          variables: ['name'],
-        });
+    const categoriesEdges: ArticlesAdminBlogObj['categories'] =
+      await Promise.all(
+        categories.map(async category => {
+          const i18n = await this.stringLanguageHelper.get({
+            item_ids: [category.id],
+            database: blog_categories,
+            plugin_code: 'blog',
+            variables: ['name'],
+          });
 
-        return {
-          ...category,
-          name: i18n.filter(value => value.variable === 'name'),
-        };
-      }),
-    );
+          return {
+            ...category,
+            name: i18n.filter(value => value.variable === 'name'),
+          };
+        }),
+      );
 
     return {
       ...pagination,

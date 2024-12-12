@@ -9,7 +9,25 @@
     },
     "articles": {
       "title": "Articles",
-      "desc": "Write and publish articles."
+      "desc": "Write and publish articles.",
+      "create": {
+        "title": "Create Article",
+        "desc": "Write a new article.",
+        "title_article": "Title",
+        "content": "Content",
+        "authors": "Authors",
+        "slug": {
+          "label": "Slug",
+          "desc": "The slug is the URL-friendly version of the title. It is usually all lowercase and contains only letters, numbers, and hyphens.",
+          "article_already_exists": "This article already exists. Please choose another slug."
+        },
+        "publish_at": "Publish Date",
+        "category": "Category",
+        "success": "Article created successfully.",
+        "submit": "Create Article",
+        "image": "Image",
+        "is_draft": "Save as Draft?"
+      }
     },
     "categories": {
       "title": "Categories",

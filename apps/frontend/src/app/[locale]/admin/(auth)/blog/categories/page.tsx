@@ -1,5 +1,5 @@
-import { CreateCategoryBlogAdmin } from '@/plugins/admin/templates/categories/actions/create';
-import { CategoriesBlogAdminView } from '@/plugins/admin/templates/categories/categories-blog-admin-view';
+import { CreateCategoryBlogAdmin } from '@/plugins/blog/templates/admin/categories/actions/create';
+import { CategoriesBlogAdminView } from '@/plugins/blog/templates/admin/categories/categories-blog-admin-view';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { CategoriesBlogObj, CategoriesBlogQuery } from 'shared/blog/categories';

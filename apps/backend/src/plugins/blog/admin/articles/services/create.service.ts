@@ -20,13 +20,12 @@ export class CreateArticlesAdminBlogService {
   ) {}
 
   async create({
-    title,
-    content,
-    author_ids,
-    slug,
-    category_id,
-    published_at,
-  }: CreateArticlesAdminBlogBody): Promise<ArticlesBlog> {
+    body: { title, content, author_ids, slug, category_id, published_at },
+    files: { image },
+  }: {
+    body: Omit<CreateArticlesAdminBlogBody, 'image'>;
+    files: Pick<CreateArticlesAdminBlogBody, 'image'>;
+  }): Promise<ArticlesBlog> {
     const category =
       await this.databaseService.db.query.blog_categories.findFirst({
         where: (table, { eq }) => eq(table.id, category_id),
