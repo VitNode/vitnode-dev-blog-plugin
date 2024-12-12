@@ -16,8 +16,8 @@ export class CategoriesBlogController {
   @ApiOkResponse({ type: CategoriesBlogObj, description: 'Show categories' })
   @Get()
   async showCategories(
-    @Query() body: CategoriesBlogQuery,
+    @Query() query: CategoriesBlogQuery,
   ): Promise<CategoriesBlogObj> {
-    return await this.showService.show(body);
+    return await this.showService.show(query);
   }
 }
