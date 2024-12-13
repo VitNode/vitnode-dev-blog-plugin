@@ -1,4 +1,12 @@
-import { Body, Get, Post, Query, UploadedFiles } from '@nestjs/common';
+import {
+  Body,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+  UploadedFiles,
+} from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import {
   ArticlesAdminBlogObj,
@@ -11,6 +19,7 @@ import { FilesValidationPipe } from 'vitnode-backend/helpers/files/files.pipe';
 import { UploadFilesMethod } from 'vitnode-backend/helpers/upload-files.decorator';
 
 import { CreateArticlesAdminBlogService } from './services/create.service';
+import { DeleteArticlesAdminBlogService } from './services/delete.service';
 import { ShowArticlesAdminBlogService } from './services/show.service';
 
 @Controllers({
@@ -23,6 +32,7 @@ export class ArticlesAdminBlogController {
   constructor(
     private readonly createService: CreateArticlesAdminBlogService,
     private readonly showService: ShowArticlesAdminBlogService,
+    private readonly deleteService: DeleteArticlesAdminBlogService,
   ) {}
 
   @ApiCreatedResponse({ type: ArticlesBlog, description: 'Created article' })
@@ -43,6 +53,12 @@ export class ArticlesAdminBlogController {
     @Body() body: CreateArticlesAdminBlogBody,
   ): Promise<ArticlesBlog> {
     return await this.createService.create({ body, files });
+  }
+
+  @ApiOkResponse({ description: 'Delete article' })
+  @Delete(':id')
+  async deleteArticle(@Param('id') id: string): Promise<void> {
+    await this.deleteService.delete(+id);
   }
 
   @ApiOkResponse({

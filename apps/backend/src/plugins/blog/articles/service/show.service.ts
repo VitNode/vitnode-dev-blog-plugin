@@ -25,7 +25,7 @@ export class ShowArticlesBlogService {
       first,
       last,
       defaultSortBy: {
-        direction: SortDirectionEnum.asc,
+        direction: SortDirectionEnum.desc,
         column: 'created_at',
       },
       query: async args =>

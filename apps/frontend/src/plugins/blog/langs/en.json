@@ -10,6 +10,11 @@
     "articles": {
       "title": "Articles",
       "desc": "Write and publish articles.",
+      "title_article": "Title",
+      "category": "Category",
+      "published_at": "Published At",
+      "draft": "Draft",
+      "edited_at": "Edited At",
       "create": {
         "title": "Create Article",
         "desc": "Write a new article.",
@@ -27,6 +32,17 @@
         "submit": "Create Article",
         "image": "Image",
         "is_draft": "Save as Draft?"
+      },
+      "edit": {
+        "title": "Edit Article",
+        "success": "Article updated successfully.",
+        "submit": "Update Article"
+      },
+      "delete": {
+        "title": "Delete Article",
+        "desc": "This action will permanently delete <title></title> article.",
+        "success": "Article deleted successfully.",
+        "submit": "Delete Article"
       }
     },
     "categories": {

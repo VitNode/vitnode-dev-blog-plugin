@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { UseFormReturn } from 'react-hook-form';
 import {
+  ArticlesAdminBlog,
   ArticlesBlog,
   ArticlesBlogObj,
   CreateArticlesAdminBlogBody,
@@ -28,26 +29,42 @@ import { useSessionAdmin } from 'vitnode-frontend/hooks/use-session-admin';
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 import { z } from 'zod';
 
+import { mutationApi } from './mutation-api';
+
 export const CreateEditBlogAdmin = ({
   categories,
+  data,
 }: {
   categories: ArticlesBlogObj['categories'];
+  data?: ArticlesAdminBlog;
 }) => {
   const { user } = useSessionAdmin();
-  const t = useTranslations('admin_blog.articles.create');
+  const t = useTranslations('admin_blog.articles');
   const tErrors = useTranslations('core.global.errors');
   const { setOpen } = useDialog();
   const { convertText } = useTextLang();
   const formSchema = z.object({
     image: zodFile.optional(),
-    title: zodLanguageInput.min(1),
-    content: zodLanguageInput.min(1),
-    slug: z.string().min(1),
-    publish_at: z.string().optional(),
-    is_draft: z.boolean().optional(),
-    category_id: z.enum([
-      ...categories.map(category => category.id.toString()),
-    ] as [string, ...string[]]),
+    title: zodLanguageInput.min(1).default(data?.title ?? []),
+    content: zodLanguageInput.min(1).default(data?.content ?? []),
+    slug: z
+      .string()
+      .min(1)
+      .default(data?.slug ?? ''),
+    publish_at: z
+      .string()
+      .default(data?.published_at.toString() ?? '')
+      .optional(),
+    is_draft: z
+      .boolean()
+      .default(data?.is_draft ?? false)
+      .optional(),
+    category_id: z
+      .enum([...categories.map(category => category.id.toString())] as [
+        string,
+        ...string[],
+      ])
+      .default(data?.category.id.toString() ?? ''),
     authors: zodComboBoxWithFetcher.min(1).default([
       {
         key: user.id.toString(),
@@ -81,23 +98,31 @@ export const CreateEditBlogAdmin = ({
     });
 
     try {
-      await fetcherClient<ArticlesBlog, CreateArticlesAdminBlogBody>({
-        url: '/admin/blog/articles',
-        method: 'POST',
-        body: formData,
-      });
+      if (data) {
+        await fetcherClient<ArticlesBlog>({
+          url: `/admin/blog/articles/${data.id}`,
+          method: 'PUT',
+          body: formData,
+        });
+      } else {
+        await fetcherClient<ArticlesBlog, CreateArticlesAdminBlogBody>({
+          url: '/admin/blog/articles',
+          method: 'POST',
+          body: formData,
+        });
+      }
+      await mutationApi();
 
       setOpen?.(false);
-      toast.success(t('success'), {
+      toast.success(t(`${data ? 'edit' : 'create'}.success`), {
         description: convertText(values.title),
       });
     } catch (err) {
       const error = err as Error;
-
       if (error.message.includes('ARTICLE_ALREADY_EXISTS')) {
         form.setError('slug', {
           type: 'manual',
-          message: t('slug.article_already_exists'),
+          message: t('create.slug.article_already_exists'),
         });
 
         return;
@@ -114,18 +139,18 @@ export const CreateEditBlogAdmin = ({
       fields={[
         {
           id: 'title',
-          label: t('title_article'),
+          label: t('create.title_article'),
           component: AutoFormStringLanguageInput,
         },
         {
           id: 'slug',
-          label: t('slug.label'),
-          description: t('slug.desc'),
+          label: t('create.slug.label'),
+          description: t('create.slug.desc'),
           component: AutoFormInput,
         },
         {
           id: 'image',
-          label: t('image'),
+          label: t('create.image'),
           component: props => (
             <AutoFormFileInput
               {...props}
@@ -138,7 +163,7 @@ export const CreateEditBlogAdmin = ({
         },
         {
           id: 'category_id',
-          label: t('category'),
+          label: t('create.category'),
           component: props => (
             <AutoFormCombobox
               labels={Object.fromEntries(
@@ -152,7 +177,7 @@ export const CreateEditBlogAdmin = ({
                           '--color-category': category.color,
                         } as React.CSSProperties
                       }
-                    />{' '}
+                    />
                     {convertText(category.name)}
                   </div>,
                 ]),
@@ -163,7 +188,7 @@ export const CreateEditBlogAdmin = ({
         },
         {
           id: 'authors',
-          label: t('authors'),
+          label: t('create.authors'),
           component: props => (
             <AutoFormCombobox
               {...props}
@@ -205,7 +230,7 @@ export const CreateEditBlogAdmin = ({
         },
         {
           id: 'content',
-          label: t('content'),
+          label: t('create.content'),
           component: props => (
             <AutoFormEditor
               {...props}
@@ -218,7 +243,7 @@ export const CreateEditBlogAdmin = ({
         },
         {
           id: 'publish_at',
-          label: t('publish_at'),
+          label: t('create.publish_at'),
           component: props => (
             <AutoFormInput
               className="max-w-fit"
@@ -229,13 +254,15 @@ export const CreateEditBlogAdmin = ({
         },
         {
           id: 'is_draft',
-          label: t('is_draft'),
+          label: t('create.is_draft'),
           component: AutoFormSwitch,
         },
       ]}
       formSchema={formSchema}
       onSubmit={onSubmit}
-      submitButton={props => <Button {...props}>{t('submit')}</Button>}
+      submitButton={props => (
+        <Button {...props}>{t(`${data ? 'edit' : 'create'}.submit`)}</Button>
+      )}
     />
   );
 };
