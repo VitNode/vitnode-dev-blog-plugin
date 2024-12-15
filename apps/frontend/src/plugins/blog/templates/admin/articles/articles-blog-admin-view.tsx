@@ -12,7 +12,6 @@ import { EditItemArticlesBlogAdmin } from './edit';
 export const ArticlesBlogAdminView = ({
   edges,
   page_info,
-  categories,
 }: ArticlesAdminBlogObj) => {
   const t = useTranslations('admin_blog.articles');
   const { convertText } = useTextLang();
@@ -70,7 +69,7 @@ export const ArticlesBlogAdminView = ({
           cell: ({ row }) => {
             return (
               <>
-                <EditItemArticlesBlogAdmin categories={categories} data={row} />
+                <EditItemArticlesBlogAdmin id={row.id} />
                 <DeleteItemArticlesBlogAdmin {...row} />
               </>
             );

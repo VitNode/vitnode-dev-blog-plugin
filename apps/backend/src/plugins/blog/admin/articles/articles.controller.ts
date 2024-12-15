@@ -20,6 +20,7 @@ import { UploadFilesMethod } from 'vitnode-backend/helpers/upload-files.decorato
 
 import { CreateArticlesAdminBlogService } from './services/create.service';
 import { DeleteArticlesAdminBlogService } from './services/delete.service';
+import { ItemArticlesAdminBlogService } from './services/item.service';
 import { ShowArticlesAdminBlogService } from './services/show.service';
 
 @Controllers({
@@ -33,6 +34,7 @@ export class ArticlesAdminBlogController {
     private readonly createService: CreateArticlesAdminBlogService,
     private readonly showService: ShowArticlesAdminBlogService,
     private readonly deleteService: DeleteArticlesAdminBlogService,
+    private readonly itemService: ItemArticlesAdminBlogService,
   ) {}
 
   @ApiCreatedResponse({ type: ArticlesBlog, description: 'Created article' })
@@ -59,6 +61,12 @@ export class ArticlesAdminBlogController {
   @Delete(':id')
   async deleteArticle(@Param('id') id: string): Promise<void> {
     await this.deleteService.delete(+id);
+  }
+
+  @ApiOkResponse({ type: ArticlesBlog, description: 'Show article' })
+  @Get(':id')
+  async itemArticle(@Param('id') id: string): Promise<ArticlesBlog> {
+    return await this.itemService.item(+id);
   }
 
   @ApiOkResponse({

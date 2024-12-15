@@ -1,7 +1,8 @@
 import { DatabaseService } from '@/database/database.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ArticlesAdminBlogObj, ArticlesBlogQuery } from 'shared/blog/articles';
 import { StringLanguageHelper } from 'vitnode-backend/helpers/string_language/helpers.service';
+import { UserHelper } from 'vitnode-backend/helpers/user.service';
 import { SortDirectionEnum } from 'vitnode-shared/utils/pagination.enum';
 
 import { blog_articles } from '../../database/schema/articles';
@@ -12,6 +13,7 @@ export class ShowArticlesAdminBlogService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly stringLanguageHelper: StringLanguageHelper,
+    private readonly userHelper: UserHelper,
   ) {}
 
   async show({
@@ -33,6 +35,7 @@ export class ShowArticlesAdminBlogService {
           ...args,
           with: {
             category: true,
+            authors: true,
           },
         }),
     });
@@ -56,8 +59,24 @@ export class ShowArticlesAdminBlogService {
           variables: ['name'],
         });
 
+        const authors: ArticlesAdminBlogObj['edges'][0]['authors'] =
+          await Promise.all(
+            edge.authors.map(async author => {
+              const user = await this.userHelper.getUserById({
+                id: author.user_id,
+              });
+
+              if (!user) {
+                throw new InternalServerErrorException();
+              }
+
+              return user;
+            }),
+          );
+
         return {
           ...edge,
+          authors,
           title: currentI18n
             .filter(value => value.variable === 'title')
             .map(value => ({

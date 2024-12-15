@@ -15,7 +15,7 @@
   },
   "overrides": {},
   "devDependencies": {
-    "eslint-config-typescript-vitnode": "0.0.10-canary.29",
+    "eslint-config-typescript-vitnode": "0.0.10-canary.31",
     "turbo": "^2.3.3"
   },
   "packageManager": "pnpm@9.12.2",

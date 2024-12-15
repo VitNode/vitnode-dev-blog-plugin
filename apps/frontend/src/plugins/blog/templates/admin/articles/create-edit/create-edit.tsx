@@ -1,3 +1,5 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import { UseFormReturn } from 'react-hook-form';
 import {
@@ -17,7 +19,6 @@ import { AutoFormInput } from 'vitnode-frontend/components/form/fields/input';
 import { AutoFormSwitch } from 'vitnode-frontend/components/form/fields/switch';
 import { AutoFormStringLanguageInput } from 'vitnode-frontend/components/form/fields/text-language-input';
 import { Button } from 'vitnode-frontend/components/ui/button';
-import { useDialog } from 'vitnode-frontend/components/ui/dialog';
 import { AvatarUser } from 'vitnode-frontend/components/ui/user/avatar';
 import { GroupFormat } from 'vitnode-frontend/components/ui/user/group-format';
 import {
@@ -27,6 +28,7 @@ import {
 } from 'vitnode-frontend/helpers/zod';
 import { useSessionAdmin } from 'vitnode-frontend/hooks/use-session-admin';
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
+import { Link, useRouter } from 'vitnode-frontend/navigation';
 import { z } from 'zod';
 
 import { mutationApi } from './mutation-api';
@@ -40,9 +42,9 @@ export const CreateEditBlogAdmin = ({
 }) => {
   const { user } = useSessionAdmin();
   const t = useTranslations('admin_blog.articles');
-  const tErrors = useTranslations('core.global.errors');
-  const { setOpen } = useDialog();
+  const tCore = useTranslations('core.global');
   const { convertText } = useTextLang();
+  const { push } = useRouter();
   const formSchema = z.object({
     image: zodFile.optional(),
     title: zodLanguageInput.min(1).default(data?.title ?? []),
@@ -65,12 +67,19 @@ export const CreateEditBlogAdmin = ({
         ...string[],
       ])
       .default(data?.category.id.toString() ?? ''),
-    authors: zodComboBoxWithFetcher.min(1).default([
-      {
-        key: user.id.toString(),
-        value: user.name,
-      },
-    ]),
+    authors: zodComboBoxWithFetcher.min(1).default(
+      data?.authors
+        ? data.authors.map(author => ({
+            key: author.id.toString(),
+            value: author.name,
+          }))
+        : [
+            {
+              key: user.id.toString(),
+              value: user.name,
+            },
+          ],
+    ),
   });
 
   const onSubmit = async (
@@ -112,8 +121,7 @@ export const CreateEditBlogAdmin = ({
         });
       }
       await mutationApi();
-
-      setOpen?.(false);
+      push('/admin/blog/articles');
       toast.success(t(`${data ? 'edit' : 'create'}.success`), {
         description: convertText(values.title),
       });
@@ -128,8 +136,8 @@ export const CreateEditBlogAdmin = ({
         return;
       }
 
-      toast.error(tErrors('title'), {
-        description: tErrors('internal_server_error'),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error'),
       });
     }
   };
@@ -217,8 +225,8 @@ export const CreateEditBlogAdmin = ({
                       ),
                     }));
                   } catch (_) {
-                    toast.error(tErrors('title'), {
-                      description: tErrors('internal_server_error'),
+                    toast.error(tCore('errors.title'), {
+                      description: tCore('errors.internal_server_error'),
                     });
 
                     return [];
@@ -261,7 +269,12 @@ export const CreateEditBlogAdmin = ({
       formSchema={formSchema}
       onSubmit={onSubmit}
       submitButton={props => (
-        <Button {...props}>{t(`${data ? 'edit' : 'create'}.submit`)}</Button>
+        <>
+          <Button asChild variant="ghost">
+            <Link href="/admin/blog/articles">{tCore('cancel')}</Link>
+          </Button>
+          <Button {...props}>{t(`${data ? 'edit' : 'create'}.submit`)}</Button>
+        </>
       )}
     />
   );

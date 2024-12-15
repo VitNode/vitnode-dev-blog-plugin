@@ -46,7 +46,7 @@ export default async function Page({
   return (
     <TranslationsProvider namespaces="admin_blog.articles">
       <HeaderContent desc={t('desc')} h1={t('title')}>
-        <CreateArticlesBlogAdmin categories={data.categories} />
+        <CreateArticlesBlogAdmin />
       </HeaderContent>
 
       <ArticlesBlogAdminView {...data} />

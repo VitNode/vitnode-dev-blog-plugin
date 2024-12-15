@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ArticlesAdminBlogController } from './articles.controller';
 import { CreateArticlesAdminBlogService } from './services/create.service';
 import { DeleteArticlesAdminBlogService } from './services/delete.service';
+import { ItemArticlesAdminBlogService } from './services/item.service';
 import { ShowArticlesAdminBlogService } from './services/show.service';
 
 @Module({
@@ -10,6 +11,7 @@ import { ShowArticlesAdminBlogService } from './services/show.service';
     CreateArticlesAdminBlogService,
     ShowArticlesAdminBlogService,
     DeleteArticlesAdminBlogService,
+    ItemArticlesAdminBlogService,
   ],
   controllers: [ArticlesAdminBlogController],
 })

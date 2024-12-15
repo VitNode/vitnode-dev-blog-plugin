@@ -9,6 +9,7 @@ import {
   IsString,
 } from 'class-validator';
 import { StringLanguage } from 'vitnode-shared/string-language.dto';
+import { User } from 'vitnode-shared/user.dto';
 import {
   PaginationObj,
   PaginationQuery,
@@ -86,6 +87,9 @@ export class ArticlesBlog {
 }
 
 export class ArticlesAdminBlog extends ArticlesBlog {
+  @ApiProperty({ type: [User] })
+  authors: User[];
+
   @ApiProperty()
   is_draft: boolean;
 

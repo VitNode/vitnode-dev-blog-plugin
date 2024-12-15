@@ -7,7 +7,7 @@ import { fetcher } from 'vitnode-frontend/api/fetcher';
 import { TranslationsProvider } from 'vitnode-frontend/components/translations-provider';
 import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
-const getData = async (query: CategoriesBlogQuery) => {
+export const getCategoriesData = async (query: CategoriesBlogQuery) => {
   const { data } = await fetcher<CategoriesBlogObj, CategoriesBlogQuery>({
     url: '/blog/categories',
     query,
@@ -28,7 +28,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 export default async function Page() {
   const [t, data] = await Promise.all([
     getTranslations('admin_blog.categories'),
-    getData({}),
+    getCategoriesData({}),
   ]);
 
   return (

@@ -25,6 +25,6 @@ export const createMutationApi = async (
     return { message: 'INTERNAL_SERVER_ERROR' };
   }
 
-  revalidatePath('/[locale]/admin/(auth)/blog/articles', 'page');
+  revalidatePath('/[locale]/admin/(auth)/blog/articles', 'layout');
   revalidatePath('/[locale]/admin/(auth)/blog/categories', 'page');
 };

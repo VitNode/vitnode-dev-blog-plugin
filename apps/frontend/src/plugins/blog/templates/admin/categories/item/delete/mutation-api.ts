@@ -9,6 +9,6 @@ export const mutationApi = async (id: number) => {
     method: 'DELETE',
   });
 
-  revalidatePath('/[locale]/admin/(auth)/blog/articles', 'page');
+  revalidatePath('/[locale]/admin/(auth)/blog/articles', 'layout');
   revalidatePath('/[locale]/admin/(auth)/blog/categories', 'page');
 };
