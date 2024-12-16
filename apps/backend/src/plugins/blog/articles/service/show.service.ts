@@ -1,7 +1,8 @@
 import { DatabaseService } from '@/database/database.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ArticlesBlogObj, ArticlesBlogQuery } from 'shared/blog/articles';
 import { StringLanguageHelper } from 'vitnode-backend/helpers/string_language/helpers.service';
+import { UserHelper } from 'vitnode-backend/helpers/user.service';
 import { SortDirectionEnum } from 'vitnode-shared/utils/pagination.enum';
 
 import { blog_articles } from '../../admin/database/schema/articles';
@@ -12,6 +13,7 @@ export class ShowArticlesBlogService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly stringLanguageHelper: StringLanguageHelper,
+    private readonly userHelper: UserHelper,
   ) {}
 
   async show({
@@ -31,14 +33,15 @@ export class ShowArticlesBlogService {
       query: async args =>
         await this.databaseService.db.query.blog_articles.findMany({
           ...args,
-          where: (table, { and, gte, eq }) =>
+          where: (table, { and, lte, eq }) =>
             and(
               args.where,
-              gte(table.published_at, new Date()),
+              lte(table.published_at, new Date()),
               eq(table.is_draft, false),
             ),
           with: {
             category: true,
+            authors: true,
           },
         }),
     });
@@ -62,8 +65,24 @@ export class ShowArticlesBlogService {
           variables: ['name'],
         });
 
+        const authors: ArticlesBlogObj['edges'][0]['authors'] =
+          await Promise.all(
+            edge.authors.map(async author => {
+              const user = await this.userHelper.getUserById({
+                id: author.user_id,
+              });
+
+              if (!user) {
+                throw new InternalServerErrorException();
+              }
+
+              return user;
+            }),
+          );
+
         return {
           ...edge,
+          authors,
           title: currentI18n
             .filter(value => value.variable === 'title')
             .map(value => ({

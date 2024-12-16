@@ -2,20 +2,10 @@ import { CreateCategoryBlogAdmin } from '@/plugins/blog/templates/admin/categori
 import { CategoriesBlogAdminView } from '@/plugins/blog/templates/admin/categories/categories-blog-admin-view';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { CategoriesBlogObj, CategoriesBlogQuery } from 'shared/blog/categories';
-import { fetcher } from 'vitnode-frontend/api/fetcher';
 import { TranslationsProvider } from 'vitnode-frontend/components/translations-provider';
 import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
-export const getCategoriesData = async (query: CategoriesBlogQuery) => {
-  const { data } = await fetcher<CategoriesBlogObj, CategoriesBlogQuery>({
-    url: '/blog/categories',
-    query,
-    cache: 'force-cache',
-  });
-
-  return data;
-};
+import { getCategoriesAdminData } from './get-data';
 
 export const generateMetadata = async (): Promise<Metadata> => {
   const t = await getTranslations('admin_blog.categories');
@@ -28,7 +18,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 export default async function Page() {
   const [t, data] = await Promise.all([
     getTranslations('admin_blog.categories'),
-    getCategoriesData({}),
+    getCategoriesAdminData({}),
   ]);
 
   return (

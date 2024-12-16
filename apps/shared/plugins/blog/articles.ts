@@ -64,6 +64,9 @@ export class CreateArticlesAdminBlogBody {
 }
 
 export class ArticlesBlog {
+  @ApiProperty({ type: [User] })
+  authors: User[];
+
   @ApiProperty()
   category: CategoryBlog;
 
@@ -80,6 +83,9 @@ export class ArticlesBlog {
   id: number;
 
   @ApiProperty()
+  published_at: Date;
+
+  @ApiProperty()
   slug: string;
 
   @ApiProperty({ type: [StringLanguage] })
@@ -87,14 +93,8 @@ export class ArticlesBlog {
 }
 
 export class ArticlesAdminBlog extends ArticlesBlog {
-  @ApiProperty({ type: [User] })
-  authors: User[];
-
   @ApiProperty()
   is_draft: boolean;
-
-  @ApiProperty()
-  published_at: Date;
 }
 
 export class ArticlesBlogQuery extends PaginationQuery {}

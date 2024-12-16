@@ -1,10 +1,15 @@
 import { DatabaseService } from '@/database/database.service';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import {
   ArticlesBlog,
   CreateArticlesAdminBlogBody,
 } from 'shared/blog/articles';
 import { StringLanguageHelper } from 'vitnode-backend/helpers/string_language/helpers.service';
+import { UserHelper } from 'vitnode-backend/helpers/user.service';
 
 import {
   blog_articles,
@@ -17,6 +22,7 @@ export class CreateArticlesAdminBlogService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly stringLanguageHelper: StringLanguageHelper,
+    private readonly userHelper: UserHelper,
   ) {}
 
   async create({
@@ -37,7 +43,8 @@ export class CreateArticlesAdminBlogService {
 
     const findArticle =
       await this.databaseService.db.query.blog_articles.findFirst({
-        where: (table, { eq }) => eq(table.slug, slug),
+        where: (table, { eq, and }) =>
+          and(eq(table.slug, slug), eq(table.category_id, category_id)),
         columns: {
           id: true,
         },
@@ -68,12 +75,15 @@ export class CreateArticlesAdminBlogService {
       })
       .returning();
 
-    await this.databaseService.db.insert(blog_articles_authors).values(
-      author_ids.map(author_id => ({
-        article_id: item.id,
-        user_id: author_id,
-      })),
-    );
+    const authorsFromDb = await this.databaseService.db
+      .insert(blog_articles_authors)
+      .values(
+        author_ids.map(author_id => ({
+          article_id: item.id,
+          user_id: author_id,
+        })),
+      )
+      .returning();
 
     const titleFromDb = await this.stringLanguageHelper.parse({
       item_id: item.id,
@@ -96,8 +106,21 @@ export class CreateArticlesAdminBlogService {
       variables: ['name'],
     });
 
+    const authors: ArticlesBlog['authors'] = await Promise.all(
+      authorsFromDb.map(async author => {
+        const user = await this.userHelper.getUserById({ id: author.user_id });
+
+        if (!user) {
+          throw new InternalServerErrorException();
+        }
+
+        return user;
+      }),
+    );
+
     return {
       ...item,
+      authors,
       title: titleFromDb,
       content: contentFromDb,
       category: {

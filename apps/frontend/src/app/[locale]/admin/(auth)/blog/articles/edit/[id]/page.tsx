@@ -9,7 +9,7 @@ import { Card } from 'vitnode-frontend/components/ui/card';
 import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 import { getTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
-import { getCategoriesData } from '../../../categories/page';
+import { getCategoriesAdminData } from '../../../categories/get-data';
 
 const getData = async (id: string) => {
   const { data } = await fetcher<ArticlesAdminBlog>({
@@ -37,7 +37,7 @@ export default async function Page({
     const { id } = await params;
     const [t, categories, data, { convertText }] = await Promise.all([
       getTranslations('admin_blog.articles.edit'),
-      getCategoriesData({}),
+      getCategoriesAdminData({}),
       getData(id),
       getTextLang(),
     ]);

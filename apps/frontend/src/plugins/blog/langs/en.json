@@ -1,5 +1,7 @@
 {
-  "blog": {},
+  "blog": {
+    "title": "Blog"
+  },
   "admin_blog": {
     "nav": {
       "title": "Blog",

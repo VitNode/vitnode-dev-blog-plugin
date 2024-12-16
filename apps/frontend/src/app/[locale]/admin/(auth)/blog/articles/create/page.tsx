@@ -5,7 +5,7 @@ import { TranslationsProvider } from 'vitnode-frontend/components/translations-p
 import { Card } from 'vitnode-frontend/components/ui/card';
 import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
-import { getCategoriesData } from '../../categories/page';
+import { getCategoriesAdminData } from '../../categories/get-data';
 
 export const generateMetadata = async (): Promise<Metadata> => {
   const t = await getTranslations('admin_blog.articles.create');
@@ -16,8 +16,10 @@ export const generateMetadata = async (): Promise<Metadata> => {
 };
 
 export default async function Page() {
-  const t = await getTranslations('admin_blog.articles.create');
-  const categories = await getCategoriesData({});
+  const [t, categories] = await Promise.all([
+    getTranslations('admin_blog.articles.create'),
+    getCategoriesAdminData({}),
+  ]);
 
   return (
     <TranslationsProvider namespaces="admin_blog.articles.create">
