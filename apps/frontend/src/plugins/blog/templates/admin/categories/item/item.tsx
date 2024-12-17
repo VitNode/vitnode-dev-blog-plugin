@@ -44,9 +44,9 @@ export const ItemCategoriesBlogAdmin = ({
           <span>{convertText(name)}</span>
           <Link
             className="text-sm"
-            href={`/blog/category/${slug}`}
+            href={`/blog/${slug}`}
             target="_blank"
-          >{`/blog/category/${slug}`}</Link>
+          >{`/blog/${slug}`}</Link>
         </div>
       </div>
     </DragAndDropSortableItem>

@@ -30,7 +30,6 @@
           "desc": "The slug is the URL-friendly version of the title. It is usually all lowercase and contains only letters, numbers, and hyphens.",
           "article_already_exists": "This article already exists. Please choose another slug."
         },
-        "publish_at": "Publish Date",
         "category": "Category",
         "success": "Article created successfully.",
         "submit": "Create Article",

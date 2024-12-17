@@ -3,11 +3,13 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import {
   ArticlesBlog,
   CreateArticlesAdminBlogBody,
 } from 'shared/blog/articles';
+import { removeSpecialCharacters } from 'vitnode-backend/functions/special-characters';
 import { StringLanguageHelper } from 'vitnode-backend/helpers/string_language/helpers.service';
 import { UserHelper } from 'vitnode-backend/helpers/user.service';
 
@@ -31,7 +33,7 @@ export class CreateArticlesAdminBlogService {
     author_ids,
     slug,
     category_id,
-    published_at,
+    is_draft,
   }: CreateArticlesAdminBlogBody): Promise<ArticlesBlog> {
     const category =
       await this.databaseService.db.query.blog_categories.findFirst({
@@ -39,7 +41,7 @@ export class CreateArticlesAdminBlogService {
       });
 
     if (!category) {
-      throw new BadRequestException('CATEGORY_NOT_FOUND');
+      throw new NotFoundException('CATEGORY_NOT_FOUND');
     }
 
     const findArticle =
@@ -58,6 +60,9 @@ export class CreateArticlesAdminBlogService {
     const findAuthors = await this.databaseService.db.query.core_users.findMany(
       {
         where: (table, { inArray }) => inArray(table.id, author_ids),
+        columns: {
+          id: true,
+        },
       },
     );
 
@@ -70,9 +75,9 @@ export class CreateArticlesAdminBlogService {
     const [item] = await this.databaseService.db
       .insert(blog_articles)
       .values({
-        slug,
+        slug: removeSpecialCharacters(slug),
         category_id,
-        published_at,
+        is_draft,
       })
       .returning();
 

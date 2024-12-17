@@ -15,7 +15,12 @@ import { SubmitDeleteItemArticlesBlogAdmin } from './submit';
 export const ContentDeleteItemArticlesBlogAdmin = ({
   id,
   title,
-}: Pick<ArticlesAdminBlogObj['edges'][0], 'id' | 'title'>) => {
+  category,
+  slug,
+}: Pick<
+  ArticlesAdminBlogObj['edges'][0],
+  'category' | 'id' | 'slug' | 'title'
+>) => {
   const t = useTranslations('admin_blog.articles.delete');
   const tGlobal = useTranslations('core.global');
   const { convertText } = useTextLang();
@@ -23,7 +28,7 @@ export const ContentDeleteItemArticlesBlogAdmin = ({
 
   const onSubmit = async () => {
     try {
-      await mutationApi(id);
+      await mutationApi({ id, categorySlug: category.slug, slug });
       setOpen?.(false);
       toast.success(t('success'), {
         description: convertText(title),

@@ -40,7 +40,11 @@ export class ItemArticlesBlogService {
     const article = await this.databaseService.db.query.blog_articles.findFirst(
       {
         where: (table, { eq, and }) =>
-          and(eq(table.slug, slug), eq(table.category_id, category.id)),
+          and(
+            eq(table.slug, slug),
+            eq(table.category_id, category.id),
+            eq(table.is_draft, false),
+          ),
         with: {
           category: true,
           authors: true,

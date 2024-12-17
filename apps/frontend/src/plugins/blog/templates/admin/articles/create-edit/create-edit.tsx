@@ -24,6 +24,7 @@ import { Link, useRouter } from 'vitnode-frontend/navigation';
 import { z } from 'zod';
 
 import { createMutationApi } from './create-mutation-api';
+import { editMutationApi } from './edit-mutation-api ';
 
 export const CreateEditBlogAdmin = ({
   categories,
@@ -44,10 +45,6 @@ export const CreateEditBlogAdmin = ({
       .string()
       .min(1)
       .default(data?.slug ?? ''),
-    publish_at: z
-      .string()
-      .default(data?.published_at.toString() ?? '')
-      .optional(),
     is_draft: z
       .boolean()
       .default(data?.is_draft ?? false)
@@ -84,9 +81,20 @@ export const CreateEditBlogAdmin = ({
       author_ids: values.authors.map(author => +author.key),
     };
 
-    const mutation = await createMutationApi(preValues);
-    if (mutation?.message) {
-      error = mutation.message;
+    if (data) {
+      const mutation = await editMutationApi({
+        ...preValues,
+        id: data.id,
+        prevSlug: data.slug,
+      });
+      if (mutation?.message) {
+        error = mutation.message;
+      }
+    } else {
+      const mutation = await createMutationApi(preValues);
+      if (mutation?.message) {
+        error = mutation.message;
+      }
     }
 
     if (error) {
@@ -203,17 +211,6 @@ export const CreateEditBlogAdmin = ({
                 plugin_code: 'blog',
                 folder: 'articles',
               }}
-            />
-          ),
-        },
-        {
-          id: 'publish_at',
-          label: t('create.publish_at'),
-          component: props => (
-            <AutoFormInput
-              className="max-w-fit"
-              type="datetime-local"
-              {...props}
             />
           ),
         },

@@ -1,9 +1,8 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Transform } from 'class-transformer';
 import {
   ArrayMinSize,
   IsArray,
-  IsDate,
+  IsBoolean,
   IsNumber,
   IsOptional,
   IsString,
@@ -33,9 +32,9 @@ export class CreateArticlesAdminBlogBody {
   content: StringLanguage[];
 
   @ApiPropertyOptional()
-  @IsDate()
+  @IsBoolean()
   @IsOptional()
-  published_at?: Date;
+  is_draft?: boolean;
 
   @ApiProperty()
   @IsString()

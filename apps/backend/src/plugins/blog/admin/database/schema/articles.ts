@@ -33,7 +33,6 @@ export const blog_articles_relations = relations(
 );
 
 export const blog_articles_authors = pgTable('blog_articles_authors', t => ({
-  id: t.serial().primaryKey(),
   article_id: t
     .integer()
     .references(() => blog_articles.id, { onDelete: 'cascade' })

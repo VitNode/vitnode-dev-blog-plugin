@@ -28,7 +28,7 @@ export class ShowArticlesBlogService {
       last,
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: 'created_at',
+        column: 'published_at',
       },
       query: async args =>
         await this.databaseService.db.query.blog_articles.findMany({

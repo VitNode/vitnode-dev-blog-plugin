@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { ArticlesAdminBlogObj } from 'shared/blog/articles';
 import { DateFormat } from 'vitnode-frontend/components/date-format';
+import { Badge } from 'vitnode-frontend/components/ui/badge';
 import { DataTable } from 'vitnode-frontend/components/ui/data-table';
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
@@ -51,7 +52,7 @@ export const ArticlesBlogAdminView = ({
           id: 'published_at',
           cell: ({ row }) => {
             if (row.is_draft) {
-              return t('draft');
+              return <Badge variant="outline">{t('draft')}</Badge>;
             }
 
             return <DateFormat date={row.published_at} />;

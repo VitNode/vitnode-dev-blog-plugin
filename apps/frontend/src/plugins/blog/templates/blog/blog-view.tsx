@@ -1,9 +1,9 @@
-import { UserIcon, UsersIcon } from 'lucide-react';
+import { ImageIcon, UserIcon, UsersIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import Image from 'next/image';
 import { ArticlesBlogObj, ArticlesBlogQuery } from 'shared/blog/articles';
 import { fetcher } from 'vitnode-frontend/api/fetcher';
 import { DateFormat } from 'vitnode-frontend/components/date-format';
+import { ImgFromApi } from 'vitnode-frontend/components/img-from-api';
 import { Badge } from 'vitnode-frontend/components/ui/badge';
 import { Card } from 'vitnode-frontend/components/ui/card';
 import { Separator } from 'vitnode-frontend/components/ui/separator';
@@ -11,7 +11,7 @@ import { cn } from 'vitnode-frontend/helpers/classnames';
 import { getTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 import { Link } from 'vitnode-frontend/navigation';
 
-import img from './photo.avif';
+import { getImagesFromEditorContent } from '../../helpers/get-images-from-editor';
 
 const getData = async () => {
   const { data } = await fetcher<ArticlesBlogObj, ArticlesBlogQuery>({
@@ -41,6 +41,7 @@ export const BlogView = async () => {
       <ul className="grid gap-6 sm:grid-cols-2 sm:gap-10 xl:grid-cols-3">
         {edges.map(edge => {
           const href = `/blog/${edge.category.slug}/${edge.slug}`;
+          const image = getImagesFromEditorContent(edge.content[0].value).at(0);
 
           return (
             <Card
@@ -54,12 +55,20 @@ export const BlogView = async () => {
               }
             >
               <Link className="relative block h-40 sm:h-52" href={href}>
-                <Image
-                  alt={convertText(edge.title)}
-                  className="rounded-t-md object-cover"
-                  fill
-                  src={img}
-                />
+                {image ? (
+                  <ImgFromApi
+                    alt={convertText(edge.title)}
+                    className="rounded-t-md object-cover"
+                    {...image}
+                    fill
+                    id={`image-${edge.id}`}
+                    sizes="(max-width: 640px) 100vw, 640px"
+                  />
+                ) : (
+                  <div className="text-muted-foreground bg-secondary flex h-full items-center justify-center rounded-t-md opacity-20">
+                    <ImageIcon className="size-24" />
+                  </div>
+                )}
               </Link>
 
               <div className="p-6">
