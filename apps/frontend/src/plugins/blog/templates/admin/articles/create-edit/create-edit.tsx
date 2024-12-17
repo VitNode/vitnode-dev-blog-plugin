@@ -2,19 +2,12 @@
 
 import { useTranslations } from 'next-intl';
 import { UseFormReturn } from 'react-hook-form';
-import {
-  ArticlesAdminBlog,
-  ArticlesBlog,
-  ArticlesBlogObj,
-  CreateArticlesAdminBlogBody,
-} from 'shared/blog/articles';
+import { ArticlesAdminBlog, ArticlesBlogObj } from 'shared/blog/articles';
 import { toast } from 'sonner';
-import { fetcherClient } from 'vitnode-frontend/api/fetcher-client';
 import { getUsersShortApi } from 'vitnode-frontend/api/get-users-short-api';
 import { AutoForm } from 'vitnode-frontend/components/form/auto-form';
 import { AutoFormCombobox } from 'vitnode-frontend/components/form/fields/combobox';
 import { AutoFormEditor } from 'vitnode-frontend/components/form/fields/editor';
-import { AutoFormFileInput } from 'vitnode-frontend/components/form/fields/file-input';
 import { AutoFormInput } from 'vitnode-frontend/components/form/fields/input';
 import { AutoFormSwitch } from 'vitnode-frontend/components/form/fields/switch';
 import { AutoFormStringLanguageInput } from 'vitnode-frontend/components/form/fields/text-language-input';
@@ -23,7 +16,6 @@ import { AvatarUser } from 'vitnode-frontend/components/ui/user/avatar';
 import { GroupFormat } from 'vitnode-frontend/components/ui/user/group-format';
 import {
   zodComboBoxWithFetcher,
-  zodFile,
   zodLanguageInput,
 } from 'vitnode-frontend/helpers/zod';
 import { useSessionAdmin } from 'vitnode-frontend/hooks/use-session-admin';
@@ -31,7 +23,7 @@ import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 import { Link, useRouter } from 'vitnode-frontend/navigation';
 import { z } from 'zod';
 
-import { mutationApi } from './mutation-api';
+import { createMutationApi } from './create-mutation-api';
 
 export const CreateEditBlogAdmin = ({
   categories,
@@ -46,7 +38,6 @@ export const CreateEditBlogAdmin = ({
   const { convertText } = useTextLang();
   const { push } = useRouter();
   const formSchema = z.object({
-    image: zodFile.optional(),
     title: zodLanguageInput.min(1).default(data?.title ?? []),
     content: zodLanguageInput.min(1).default(data?.content ?? []),
     slug: z
@@ -86,48 +77,20 @@ export const CreateEditBlogAdmin = ({
     values: z.infer<typeof formSchema>,
     form: UseFormReturn<z.infer<typeof formSchema>>,
   ) => {
-    const formData = new FormData();
-    values.title.forEach(title => {
-      formData.append('title', JSON.stringify(title));
-    });
-    values.content.forEach(content => {
-      formData.append('content', JSON.stringify(content));
-    });
-    formData.append('slug', values.slug);
-    formData.append('is_draft', values.is_draft ? 'true' : 'false');
-    formData.append('category_id', values.category_id);
-    if (values.publish_at) {
-      formData.append('publish_at', values.publish_at);
-    }
-    if (values.image && values.image instanceof File) {
-      formData.append('image', values.image);
-    }
-    values.authors.forEach(author => {
-      formData.append('author_ids', author.key);
-    });
+    let error = '';
+    const preValues = {
+      ...values,
+      category_id: +values.category_id,
+      author_ids: values.authors.map(author => +author.key),
+    };
 
-    try {
-      if (data) {
-        await fetcherClient<ArticlesBlog>({
-          url: `/admin/blog/articles/${data.id}`,
-          method: 'PUT',
-          body: formData,
-        });
-      } else {
-        await fetcherClient<ArticlesBlog, CreateArticlesAdminBlogBody>({
-          url: '/admin/blog/articles',
-          method: 'POST',
-          body: formData,
-        });
-      }
-      await mutationApi();
-      push('/admin/blog/articles');
-      toast.success(t(`${data ? 'edit' : 'create'}.success`), {
-        description: convertText(values.title),
-      });
-    } catch (err) {
-      const error = err as Error;
-      if (error.message.includes('ARTICLE_ALREADY_EXISTS')) {
+    const mutation = await createMutationApi(preValues);
+    if (mutation?.message) {
+      error = mutation.message;
+    }
+
+    if (error) {
+      if (error.includes('ARTICLE_ALREADY_EXISTS')) {
         form.setError('slug', {
           type: 'manual',
           message: t('create.slug.article_already_exists'),
@@ -139,7 +102,14 @@ export const CreateEditBlogAdmin = ({
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });
+
+      return;
     }
+
+    push('/admin/blog/articles');
+    toast.success(t(`${data ? 'edit' : 'create'}.success`), {
+      description: convertText(values.title),
+    });
   };
 
   return (
@@ -155,19 +125,6 @@ export const CreateEditBlogAdmin = ({
           label: t('create.slug.label'),
           description: t('create.slug.desc'),
           component: AutoFormInput,
-        },
-        {
-          id: 'image',
-          label: t('create.image'),
-          component: props => (
-            <AutoFormFileInput
-              {...props}
-              accept="image/png, image/jpeg, image/webp"
-              acceptExtensions={['png', 'jpg', 'webp']}
-              maxFileSizeInMb={2}
-              showInfo
-            />
-          ),
         },
         {
           id: 'category_id',

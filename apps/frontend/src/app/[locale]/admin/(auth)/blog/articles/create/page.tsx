@@ -23,11 +23,13 @@ export default async function Page() {
 
   return (
     <TranslationsProvider namespaces="admin_blog.articles.create">
-      <HeaderContent desc={t('desc')} h1={t('title')} />
+      <div className="mx-auto max-w-4xl">
+        <HeaderContent desc={t('desc')} h1={t('title')} />
 
-      <Card className="p-6">
-        <CreateEditBlogAdmin categories={categories.edges} />
-      </Card>
+        <Card className="p-6">
+          <CreateEditBlogAdmin categories={categories.edges} />
+        </Card>
+      </div>
     </TranslationsProvider>
   );
 }

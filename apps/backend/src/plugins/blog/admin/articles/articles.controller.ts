@@ -1,12 +1,4 @@
-import {
-  Body,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Query,
-  UploadedFiles,
-} from '@nestjs/common';
+import { Body, Delete, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import {
   ArticlesAdminBlogObj,
@@ -15,8 +7,6 @@ import {
   CreateArticlesAdminBlogBody,
 } from 'shared/blog/articles';
 import { Controllers } from 'vitnode-backend/helpers/controller.decorator';
-import { FilesValidationPipe } from 'vitnode-backend/helpers/files/files.pipe';
-import { UploadFilesMethod } from 'vitnode-backend/helpers/upload-files.decorator';
 
 import { CreateArticlesAdminBlogService } from './services/create.service';
 import { DeleteArticlesAdminBlogService } from './services/delete.service';
@@ -39,22 +29,10 @@ export class ArticlesAdminBlogController {
 
   @ApiCreatedResponse({ type: ArticlesBlog, description: 'Created article' })
   @Post()
-  @UploadFilesMethod({ fields: ['image'] })
   async createArticle(
-    @UploadedFiles(
-      new FilesValidationPipe({
-        icon: {
-          maxSize: 1024 * 1024 * 2, // 2 MB
-          acceptMimeType: ['image/png', 'image/jpeg', 'image/webp'],
-          isOptional: true,
-          maxCount: 1,
-        },
-      }),
-    )
-    files: Pick<CreateArticlesAdminBlogBody, 'image'>,
     @Body() body: CreateArticlesAdminBlogBody,
   ): Promise<ArticlesBlog> {
-    return await this.createService.create({ body, files });
+    return await this.createService.create(body);
   }
 
   @ApiOkResponse({ description: 'Delete article' })

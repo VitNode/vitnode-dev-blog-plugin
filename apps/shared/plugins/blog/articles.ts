@@ -22,27 +22,15 @@ export class CreateArticlesAdminBlogBody {
   @ArrayMinSize(1)
   @IsArray()
   @IsNumber({}, { each: true })
-  @Transform(({ value }) =>
-    Array.isArray(value) ? value.map(item => +item) : [+value],
-  )
   author_ids: number[];
 
   @ApiProperty()
   @IsNumber()
-  @Transform(({ value }) => +value)
   category_id: number;
 
   @ApiProperty({ type: [StringLanguage] })
   @ArrayMinSize(1)
-  @Transform(({ value }: { value: string }) => {
-    const current = JSON.parse(value);
-
-    return Array.isArray(current) ? current : [current];
-  })
   content: StringLanguage[];
-
-  @ApiPropertyOptional({ type: 'string', format: 'binary' })
-  image: Express.Multer.File;
 
   @ApiPropertyOptional()
   @IsDate()
@@ -55,11 +43,6 @@ export class CreateArticlesAdminBlogBody {
 
   @ApiProperty({ type: [StringLanguage] })
   @ArrayMinSize(1)
-  @Transform(({ value }: { value: string }) => {
-    const current = JSON.parse(value);
-
-    return Array.isArray(current) ? current : [current];
-  })
   title: StringLanguage[];
 }
 

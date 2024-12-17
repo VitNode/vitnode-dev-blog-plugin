@@ -1,6 +1,8 @@
 {
   "blog": {
-    "title": "Blog"
+    "title": "Blog",
+    "desc": "Read the latest articles.",
+    "authors_count": "+{count, plural, other {# authors}}"
   },
   "admin_blog": {
     "nav": {
@@ -32,7 +34,6 @@
         "category": "Category",
         "success": "Article created successfully.",
         "submit": "Create Article",
-        "image": "Image",
         "is_draft": "Save as Draft?"
       },
       "edit": {

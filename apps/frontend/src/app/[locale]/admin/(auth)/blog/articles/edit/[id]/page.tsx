@@ -46,11 +46,13 @@ export default async function Page({
       <TranslationsProvider
         namespaces={['admin_blog.articles.create', 'admin_blog.articles.edit']}
       >
-        <HeaderContent desc={convertText(data.title)} h1={t('title')} />
+        <div className="mx-auto max-w-4xl">
+          <HeaderContent desc={convertText(data.title)} h1={t('title')} />
 
-        <Card className="p-6">
-          <CreateEditBlogAdmin categories={categories.edges} data={data} />
-        </Card>
+          <Card className="p-6">
+            <CreateEditBlogAdmin categories={categories.edges} data={data} />
+          </Card>
+        </div>
       </TranslationsProvider>
     );
   } catch (err) {
