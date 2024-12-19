@@ -1,4 +1,4 @@
-import { ItemBlogView } from '@/plugins/blog/templates/blog/item/item-blog-view';
+import { ArticleBlogView } from '@/plugins/blog/templates/blog/article/article-view';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ArticlesBlog } from 'shared/blog/articles';
@@ -12,15 +12,25 @@ const getData = async ({
   category_slug: string;
   slug: string;
 }) => {
-  const { data } = await fetcher<ArticlesBlog>({
-    url: `/blog/articles/${category_slug}/${slug}`,
-    cache: 'force-cache',
-    next: {
-      tags: [`blog_articles__${category_slug}_${slug}`],
-    },
-  });
+  try {
+    const { data } = await fetcher<ArticlesBlog>({
+      url: `/blog/articles/${category_slug}/${slug}`,
+      cache: 'force-cache',
+      next: {
+        tags: [`blog_articles__${category_slug}_${slug}`],
+      },
+    });
 
-  return data;
+    return data;
+  } catch (err) {
+    const error = err as Error;
+
+    if (error.message.includes('404')) {
+      notFound();
+    }
+
+    throw error;
+  }
 };
 
 interface Props {
@@ -40,26 +50,16 @@ export const generateMetadata = async ({
   ]);
 
   return {
-    title: convertText(data.title),
+    title: `${convertText(data.title)} - ${convertText(data.category.name)}`,
   };
 };
 
 export default async function Page({ params }: Props) {
   const { categorySlug, articleSlug } = await params;
-  try {
-    const data = await getData({
-      slug: articleSlug,
-      category_slug: categorySlug,
-    });
+  const data = await getData({
+    slug: articleSlug,
+    category_slug: categorySlug,
+  });
 
-    return <ItemBlogView {...data} />;
-  } catch (err) {
-    const error = err as Error;
-
-    if (error.message.includes('404')) {
-      notFound();
-    }
-
-    throw error;
-  }
+  return <ArticleBlogView {...data} />;
 }

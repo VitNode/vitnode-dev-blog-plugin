@@ -8,7 +8,7 @@ import { GroupFormat } from 'vitnode-frontend/components/ui/user/group-format';
 import { getTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 import { Link } from 'vitnode-frontend/navigation';
 
-export const ItemBlogView = async ({
+export const ArticleBlogView = async ({
   category,
   title,
   content,

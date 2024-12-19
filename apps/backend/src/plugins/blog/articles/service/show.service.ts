@@ -1,5 +1,9 @@
 import { DatabaseService } from '@/database/database.service';
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { ArticlesBlogObj, ArticlesBlogQuery } from 'shared/blog/articles';
 import { StringLanguageHelper } from 'vitnode-backend/helpers/string_language/helpers.service';
 import { UserHelper } from 'vitnode-backend/helpers/user.service';
@@ -20,7 +24,25 @@ export class ShowArticlesBlogService {
     cursor,
     first,
     last,
+    category_slug,
   }: ArticlesBlogQuery): Promise<ArticlesBlogObj> {
+    let categoryId: null | number = null;
+    if (category_slug) {
+      const category =
+        await this.databaseService.db.query.blog_categories.findFirst({
+          where: (table, { eq }) => eq(table.slug, category_slug),
+          columns: {
+            id: true,
+          },
+        });
+
+      if (!category) {
+        throw new NotFoundException();
+      }
+
+      categoryId = category.id;
+    }
+
     const pagination = await this.databaseService.paginationCursor({
       cursor,
       database: blog_articles,
@@ -38,6 +60,7 @@ export class ShowArticlesBlogService {
               args.where,
               lte(table.published_at, new Date()),
               eq(table.is_draft, false),
+              categoryId ? eq(table.category_id, categoryId) : undefined,
             ),
           with: {
             category: true,

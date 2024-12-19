@@ -79,7 +79,12 @@ export class ArticlesAdminBlog extends ArticlesBlog {
   is_draft: boolean;
 }
 
-export class ArticlesBlogQuery extends PaginationQuery {}
+export class ArticlesBlogQuery extends PaginationQuery {
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  category_slug?: string;
+}
 
 export class ArticlesBlogObj extends PaginationObj {
   @ApiProperty({ type: [CategoryBlog] })
