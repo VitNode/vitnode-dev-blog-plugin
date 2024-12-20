@@ -32,13 +32,13 @@ export const LayoutCategoryBlog = async ({
         }
       >
         <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[--color-category] opacity-20" />
-        <div className="container relative z-10 flex max-w-4xl flex-col items-center justify-center gap-2 py-20 pb-32">
+        <div className="container relative z-10 flex max-w-4xl flex-col items-center justify-center gap-2 py-20 pb-32 text-center">
           <h1 className="text-balance text-center text-4xl font-semibold tracking-tight sm:text-5xl">
             {category ? convertText(category.name) : t('title')}
           </h1>
           <p className="text-muted-foreground">{t('desc')}</p>
 
-          <div className="mt-6 flex items-center gap-2">
+          <div className="mt-6 flex max-w-prose items-center gap-2 overflow-x-auto px-6">
             <NavLayoutCategoryBlog categories={categories} slug={slug} />
           </div>
         </div>

@@ -16,11 +16,6 @@
       "code": "categories",
       "icon": "boxes",
       "keywords": []
-    },
-    {
-      "code": "settings",
-      "icon": "settings",
-      "keywords": []
     }
   ],
   "version": "0.0.1",
