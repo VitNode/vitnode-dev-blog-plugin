@@ -26,7 +26,7 @@ export const ItemCategoriesBlogAdmin = ({
             slug={slug}
             {...props}
           />
-          <DeleteItemCategoriesBlogAdmin id={id} name={name} />
+          <DeleteItemCategoriesBlogAdmin id={id} name={name} slug={slug} />
         </>
       }
       className="flex flex-1 items-center justify-between gap-2"
