@@ -62,6 +62,7 @@ export class EditCategoriesAdminBlogService {
         color,
         position,
         slug,
+        updated_at: new Date(),
       })
       .where(eq(blog_categories.id, id))
       .returning();

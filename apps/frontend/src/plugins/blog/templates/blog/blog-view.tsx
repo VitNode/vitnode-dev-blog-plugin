@@ -6,7 +6,7 @@ export const BlogView = async () => {
   const { edges, categories } = await getArticlesData({});
 
   return (
-    <LayoutCategoryBlog categories={categories}>
+    <LayoutCategoryBlog categories={categories} count={edges.length}>
       <CategoryBlogView edges={edges} />
     </LayoutCategoryBlog>
   );

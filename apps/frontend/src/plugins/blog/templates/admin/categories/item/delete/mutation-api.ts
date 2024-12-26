@@ -1,14 +1,22 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
 import { fetcher } from 'vitnode-frontend/api/fetcher';
 
-export const mutationApi = async (id: number) => {
+import { revalidateCategoryApi } from '../../revalidate-article-api';
+
+export const mutationApi = async ({
+  id,
+  slug,
+}: {
+  id: number;
+  slug: string;
+}) => {
   await fetcher<object>({
     url: `/admin/blog/categories/${id}`,
     method: 'DELETE',
   });
 
-  revalidatePath('/[locale]/admin/(auth)/blog/articles', 'layout');
-  revalidatePath('/[locale]/admin/(auth)/blog/categories', 'page');
+  revalidateCategoryApi({
+    slug,
+  });
 };

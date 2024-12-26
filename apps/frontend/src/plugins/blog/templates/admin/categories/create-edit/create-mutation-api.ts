@@ -1,11 +1,12 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
 import {
   CategoryBlog,
   CreateCategoriesAdminBlogBody,
 } from 'shared/blog/categories';
 import { fetcher } from 'vitnode-frontend/api/fetcher';
+
+import { revalidateCategoryApi } from '../revalidate-article-api';
 
 export const createMutationApi = async (
   body: CreateCategoriesAdminBlogBody,
@@ -25,6 +26,7 @@ export const createMutationApi = async (
     return { message: 'INTERNAL_SERVER_ERROR' };
   }
 
-  revalidatePath('/[locale]/admin/(auth)/blog/articles', 'layout');
-  revalidatePath('/[locale]/admin/(auth)/blog/categories', 'page');
+  revalidateCategoryApi({
+    slug: body.slug,
+  });
 };

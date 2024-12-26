@@ -12,6 +12,7 @@ export const revalidateArticleApi = ({
   revalidatePath('/[locale]/admin/(auth)/blog/articles', 'page');
   revalidatePath('/[locale]/(main)/(layout)/blog', 'page');
   revalidatePath('/[locale]/(main)/(layout)', 'page');
+  revalidateTag(`blog_articles__${categorySlug}`);
   revalidateTag(`blog_articles__${categorySlug}_${slug}`);
   if (prevSlug && prevSlug !== slug) {
     revalidateTag(`blog_articles__${categorySlug}_${prevSlug}`);

@@ -36,7 +36,11 @@ export default async function Page({ params }: Props) {
   });
 
   return (
-    <LayoutCategoryBlog categories={categories} slug={categorySlug}>
+    <LayoutCategoryBlog
+      categories={categories}
+      count={edges.length}
+      slug={categorySlug}
+    >
       <CategoryBlogView edges={edges} />
     </LayoutCategoryBlog>
   );

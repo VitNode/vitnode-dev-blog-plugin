@@ -8,9 +8,11 @@ export const LayoutCategoryBlog = async ({
   children,
   categories,
   slug,
+  count,
 }: {
   categories: ArticlesBlogObj['categories'];
   children: React.ReactNode;
+  count: number;
   slug?: string;
 }) => {
   const [t, { convertText }] = await Promise.all([
@@ -38,15 +40,25 @@ export const LayoutCategoryBlog = async ({
           </h1>
           <p className="text-muted-foreground">{t('desc')}</p>
 
-          <div className="mt-6 flex max-w-prose items-center gap-2 overflow-x-auto px-6">
-            <NavLayoutCategoryBlog categories={categories} slug={slug} />
-          </div>
+          {categories.length > 0 && (
+            <div className="mt-6 flex max-w-prose items-center gap-2 overflow-x-auto px-6">
+              <NavLayoutCategoryBlog categories={categories} slug={slug} />
+            </div>
+          )}
         </div>
       </div>
 
-      <div className="container relative z-10 -mt-10 mb-10 grid gap-6 sm:grid-cols-2 sm:gap-10 xl:grid-cols-3">
-        {children}
-      </div>
+      {count ? (
+        <div className="container relative z-10 -mt-10 mb-10 grid gap-6 sm:grid-cols-2 sm:gap-10 xl:grid-cols-3">
+          {children}
+        </div>
+      ) : (
+        <div className="container relative z-10 -mt-10 mb-10">
+          <p className="text-muted-foreground text-center">
+            {t('no_articles')}
+          </p>
+        </div>
+      )}
     </>
   );
 };

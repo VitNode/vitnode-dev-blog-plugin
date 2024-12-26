@@ -46,6 +46,7 @@ export const CreateEditCategoryBlogAdmin = ({
         ...values,
         id: data.id,
         position: data.position,
+        prevSlug: data.slug,
       });
 
       if (mutation?.message) {

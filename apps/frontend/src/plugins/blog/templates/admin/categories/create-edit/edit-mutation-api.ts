@@ -1,16 +1,18 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
 import {
   CategoryBlog,
   EditCategoriesAdminBlogBody,
 } from 'shared/blog/categories';
 import { fetcher } from 'vitnode-frontend/api/fetcher';
 
+import { revalidateCategoryApi } from '../revalidate-article-api';
+
 export const editMutationApi = async ({
   id,
+  prevSlug,
   ...body
-}: EditCategoriesAdminBlogBody & { id: number }) => {
+}: EditCategoriesAdminBlogBody & { id: number; prevSlug: string }) => {
   try {
     await fetcher<CategoryBlog, EditCategoriesAdminBlogBody>({
       url: `/admin/blog/categories/${id}`,
@@ -26,6 +28,8 @@ export const editMutationApi = async ({
     return { message: 'INTERNAL_SERVER_ERROR' };
   }
 
-  revalidatePath('/[locale]/admin/(auth)/blog/articles', 'layout');
-  revalidatePath('/[locale]/admin/(auth)/blog/categories', 'page');
+  revalidateCategoryApi({
+    slug: body.slug,
+    prevSlug,
+  });
 };

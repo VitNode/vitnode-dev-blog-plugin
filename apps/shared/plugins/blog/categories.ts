@@ -44,6 +44,9 @@ export class CategoryBlog {
 
   @ApiProperty()
   slug: string;
+
+  @ApiProperty()
+  updated_at: Date;
 }
 
 export class CategoriesBlogQuery extends PaginationQuery {}

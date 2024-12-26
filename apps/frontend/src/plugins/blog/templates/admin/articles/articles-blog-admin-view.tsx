@@ -1,11 +1,15 @@
 'use client';
 
+import { EyeIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { ArticlesAdminBlogObj } from 'shared/blog/articles';
 import { DateFormat } from 'vitnode-frontend/components/date-format';
 import { Badge } from 'vitnode-frontend/components/ui/badge';
+import { Button } from 'vitnode-frontend/components/ui/button';
 import { DataTable } from 'vitnode-frontend/components/ui/data-table';
+import { TooltipWrapper } from 'vitnode-frontend/components/ui/tooltip';
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
+import { Link } from 'vitnode-frontend/navigation';
 
 import { DeleteItemArticlesBlogAdmin } from './delete/delete';
 import { EditItemArticlesBlogAdmin } from './edit';
@@ -70,6 +74,21 @@ export const ArticlesBlogAdminView = ({
           cell: ({ row }) => {
             return (
               <>
+                <TooltipWrapper content={t('open_article')}>
+                  <Button
+                    ariaLabel={t('open_article')}
+                    asChild
+                    size="icon"
+                    variant="ghost"
+                  >
+                    <Link
+                      href={`/blog/${row.category.slug}/${row.slug}`}
+                      target="_blank"
+                    >
+                      <EyeIcon />
+                    </Link>
+                  </Button>
+                </TooltipWrapper>
                 <EditItemArticlesBlogAdmin id={row.id} />
                 <DeleteItemArticlesBlogAdmin {...row} />
               </>

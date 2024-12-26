@@ -6,4 +6,5 @@ export const blog_categories = pgTable('blog_categories', t => ({
   position: t.integer().notNull().default(0),
   slug: t.varchar({ length: 255 }).notNull().unique(),
   created_at: t.timestamp().notNull().defaultNow(),
+  updated_at: t.timestamp().notNull().defaultNow(),
 }));
