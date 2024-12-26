@@ -29,6 +29,7 @@ export const CategoriesBlogAdminView = ({ edges }: CategoriesBlogObj) => {
             ...item,
             id: item.id,
             position: indexToMove,
+            prevSlug: item.slug,
           });
         } catch (_) {
           toast.error(tErrors('title'), {
