@@ -4,6 +4,8 @@ import type blog from '@/plugins/blog/langs/en.json';
 
 type Messages = typeof core & typeof admin & typeof blog;
 
-declare global {
-  interface IntlMessages extends Messages {}
+declare module 'next-intl' {
+  interface AppConfig {
+    Messages: Messages;
+  }
 }

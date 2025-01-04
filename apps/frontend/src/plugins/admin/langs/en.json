@@ -83,7 +83,17 @@
         },
         "enable": "Enable",
         "disable": "Disable",
-        "how_to_enable": "How to enable?"
+        "how_to_enable": "How to enable?",
+        "error_logs": {
+          "title": "Error Logs",
+          "desc": "If you have any issues with your website, you can check the error logs here.",
+          "name": "Name",
+          "message": "Message",
+          "created": "Created",
+          "more_info": "More Info",
+          "url": "URL",
+          "headers": "Headers"
+        }
       },
       "email": {
         "hello": "Hello"
@@ -267,10 +277,6 @@
             "label": "Icon",
             "desc": "Represent your website on devices (PWA). Recommended size: 512x512px."
           },
-          "favicon": {
-            "label": "Favicon",
-            "desc": "Icon in browser tab. Recommended size: 32x32px."
-          },
           "display": {
             "label": "Display",
             "desc": "The display property controls how the app is displayed.",
@@ -345,32 +351,6 @@
               "submit": "Yes, delete navigation",
               "desc": "This action will delete <code></code> navigation.",
               "success": "Navigation has been deleted."
-            }
-          },
-          "permissions-admin": {
-            "title": "Admin Permissions",
-            "page_permission": "Page: <page></page>",
-            "lang_key": "Lang Key: <key></key>",
-            "create_edit": {
-              "id": {
-                "label": "ID",
-                "desc": "Unique ID for this permission.",
-                "exists": "Permission with this ID already exists."
-              },
-              "parent": {
-                "label": "Group",
-                "null": "No group permission"
-              },
-              "create_success": "Permission has been created."
-            },
-            "delete": {
-              "desc": "This action will delete the permission <id></id>. Remember to delete all conditions associated with this permission.",
-              "submit": "Yes, delete permission",
-              "success": "Permission has been deleted.",
-              "children_warn": {
-                "title": "This permission has children",
-                "desc": "If you delete this permission, all children will be deleted too."
-              }
             }
           },
           "export": {
@@ -577,6 +557,22 @@
             "uses_warning": "This file is used in other part of the system.",
             "success": "File has been deleted.",
             "submit": "Yes, delete file"
+          }
+        },
+        "cron": {
+          "title": "Cron Jobs",
+          "desc": "Tasks that run automatically at a specific time.",
+          "name": "Name",
+          "schedule": "Schedule",
+          "next_date": "Next Date",
+          "running": {
+            "title": "Status",
+            "enabled": "Enabled",
+            "disabled": "Disabled"
+          },
+          "last_execution": {
+            "title": "Last Execution",
+            "never": "Never"
           }
         }
       }

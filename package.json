@@ -15,7 +15,7 @@
   },
   "overrides": {},
   "devDependencies": {
-    "eslint-config-typescript-vitnode": "0.1.0-rc.0",
+    "eslint-config-typescript-vitnode": "0.1.1",
     "turbo": "^2.3.3"
   },
   "packageManager": "pnpm@9.12.2",
