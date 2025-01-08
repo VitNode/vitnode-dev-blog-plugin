@@ -18,9 +18,9 @@ import {
   zodComboBoxWithFetcher,
   zodLanguageInput,
 } from 'vitnode-frontend/helpers/zod';
-import { useSessionAdmin } from 'vitnode-frontend/hooks/use-session-admin';
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 import { Link, useRouter } from 'vitnode-frontend/navigation';
+import { UserWithDangerousInfo } from 'vitnode-shared/user.dto';
 import { z } from 'zod';
 
 import { createMutationApi } from './create-mutation-api';
@@ -29,11 +29,12 @@ import { editMutationApi } from './edit-mutation-api ';
 export const CreateEditBlogAdmin = ({
   categories,
   data,
+  user,
 }: {
   categories: ArticlesBlogObj['categories'];
   data?: ArticlesAdminBlog;
+  user: UserWithDangerousInfo;
 }) => {
-  const { user } = useSessionAdmin();
   const t = useTranslations('admin_blog.articles');
   const tCore = useTranslations('core.global');
   const { convertText } = useTextLang();
